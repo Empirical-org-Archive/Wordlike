@@ -1,0 +1,14 @@
+<div>
+	<input type="text" ng-model="input">
+ 		<div class="button" ng-click="fetchData()">Fetch words</div>
+ 		<ul>
+ 			<li ng-repeat="word in wordlist">
+				{{word}}
+ 			</li>
+ 		</ul>
+ 		<div ng-show="toShow">
+			<input type="text" ng-model="input2">
+			<div class="button" ng-click="compare()">Compare to the list</div>
+ 			<h1>{{status}}</h1>
+		</div>
+</div>
