@@ -1,0 +1,30 @@
+<div class="column-left">
+	<div style="border-style:solid; border-width:1px; padding-top:5px; padding-bottom:5px;">Words Found</div>
+	<div style="border-style:solid; border-width:1px">
+		<ul><li ng-repeat="word in words"><span ng-show='word.show' ng-class="{'strike': word.strike}">{{word.word}}</span></li></ul>
+	</div>
+</div>
+
+<div class="column-center">
+	<h1>{{input}}</h1>
+	<p>{{definition}}</p>
+	<timer start="6" on-done="outOfTime" run="runTimer"></timer>
+
+	<form ng-submit="fetchData()">
+		<input type="text" ng-model="input" placeholder="Input word here">
+	</form>
+
+	<div ng-show="toShow">
+		<input type="text" ng-model="input2">
+		<button ng-click="compare()">Compare to the list</button>
+		<h1>{{status}}</h1>
+	</div>
+</div>
+
+<div class="column-right">
+	<div style="border-style:solid; border-width:1px; padding-top:10px; padding-bottom:10px">{{points}} Points</div>
+	<div style="border-style:solid; border-width:1px; padding-top:5px; padding-bottom:5px; margin-top:20px">Leaderboard</div>
+	<div style="border-style:solid; border-width:1px">
+		<p>Players in the session will go here...</p>
+	</div>
+</div>
