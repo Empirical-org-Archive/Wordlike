@@ -3,7 +3,32 @@
 <html>
 	<head>
  		<title>Synonym App</title>
+
+ 		<style>
+ 			li {padding-top: 5px; padding-bottom:5px}
+
+ 			.blank {color: white;}
+ 			.show {color: black;}
+ 			.strike {text-decoration: line-through;}
+
+ 			.header {
+
+ 				background-color:orange;
+ 				color:white;
+ 				font-size:2em;
+ 				text-align:center;
+ 				margin-bottom:10px;
+ 			}
+ 			.column-left{ float: left; width: 16%; margin-right: 2%; margin-left: 2%}
+			.column-right{ float: right; width: 16%; margin-right: 2%; margin-left: 2%}
+			.column-center{ display: inline-block; width: 60%; }
+ 		</style>
 	</head>
+
+	<header>
+		<div class="header">Quill Synonyms Game</div>
+	</header>
+
 	<body ng-app="synonymApp" ng-controller="AppCtrl">
 
  		<appdir></appdir>
