@@ -119,7 +119,7 @@ app.directive('appdir', function ($templateCache) {
 	};
 });
 
-app.directive('timer', ['$timeout', function ($timeout) {
+app.directive('timer', ['$interval', function ($interval) {
 
 	return {
 		restrict: 'E',
@@ -129,24 +129,22 @@ app.directive('timer', ['$timeout', function ($timeout) {
 
 			scope.seconds = attrs.start;
 
-			scope.$watch(attrs.run, function(value) {
-
-console.log(value.value)
-				if(value.value) {tick();}
-
-			});
+      var intervalPromise = null;
 
 			var tick = function() {
+        console.log(scope.run);
+        if (scope.run && scope.run.value) {
+				  scope.seconds--;
+        }
 
-				scope.seconds--;
-
-				if(scope.seconds == 0) {
+				if(scope.seconds === 0) {
+          $interval.cancel(intervalPromise);
 					scope.onDone();
 					return;
 				}
-
-				$timeout(tick, 1000);
 			}
+
+      intervalPromise = $interval(tick, 1000);
 
 
 		}
