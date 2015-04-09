@@ -1,0 +1,10 @@
+{
+"data": [
+	{ "word":"smart", "type":"adjective" },
+	{ "word":"spring", "type":"noun" },
+	{ "word":"little", "type":"adjective" },
+	{ "word":"quickly", "type":"adverb" },
+	{ "word":"friend", "type":"noun" },
+	{ "word":"jump", "type":"verb" },
+	{ "word":"amazing", "type":"adjective" }
+]}
