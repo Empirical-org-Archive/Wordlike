@@ -1,30 +1,34 @@
 <div class="column-left">
-	<div style="border-style:solid; border-width:1px; padding-top:5px; padding-bottom:5px;">Words Found</div>
-	<div style="border-style:solid; border-width:1px">
+	<div class="bordered" style="padding-left:5px; padding-top:5px; padding-bottom:5px">Words Found</div>
+	<div class="bordered">
 		<ul><li ng-repeat="word in words"><span ng-show='word.show' ng-class="{'strike': word.strike}">{{word.word}}</span></li></ul>
+	</div>
+	<div class="bordered" style="background-color:#FFD633; margin-top:20px; padding-left:5px; padding-right:5px">
+		<p>Click the button to show a word. You will have 60 seconds to try and guess as many synonyms of that word as you can. After 5 seconds without a guess, one of the words will be revealed.</p>
+		<p>Guessing a synonym correctly will result in 5 points. Typing in a word after it has been revealed will only net you 1 point.</p>
 	</div>
 </div>
 
 <div class="column-center">
-	<h1>{{input}}</h1>
+	<span style="float:right">{{seconds}} seconds left</span>
+	<h1>{{myWord}}</h1>
 	<p>{{definition}}</p>
-	<timer start="6" on-done="outOfTime" run="runTimer"></timer>
 
-	<form ng-submit="fetchData()">
-		<input type="text" ng-model="input" placeholder="Input word here">
-	</form>
+	<div ng-show="showSubmit">
+		<button ng-click="fetchData()">Next word</button>
+	</div>
 
-	<div ng-show="toShow">
-		<input type="text" ng-model="input2">
+	<div ng-show="showCompare">
+		<input type="text" ng-model="input">
 		<button ng-click="compare()">Compare to the list</button>
 		<h1>{{status}}</h1>
 	</div>
 </div>
 
 <div class="column-right">
-	<div style="border-style:solid; border-width:1px; padding-top:10px; padding-bottom:10px">{{points}} Points</div>
-	<div style="border-style:solid; border-width:1px; padding-top:5px; padding-bottom:5px; margin-top:20px">Leaderboard</div>
-	<div style="border-style:solid; border-width:1px">
-		<p>Players in the session will go here...</p>
+	<div class="bordered" style="padding-left:5px; padding-top:10px; padding-bottom:10px">{{points}} Points</div>
+	<div class="bordered" style="padding-left:5px; padding-top:5px; padding-bottom:5px; margin-top:20px">Leaderboard</div>
+	<div style="border-style:solid; border-width:1px; border-color:gray">
+		<p style="padding-left:5px" ng-repeat="player in players">{{player.userid | playerFilter:userid:this}} - ({{player.points}} Points)</p>
 	</div>
 </div>
