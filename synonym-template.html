@@ -1,30 +1,36 @@
 <div class="column-left">
-	<div style="border-style:solid; border-width:1px; padding-top:5px; padding-bottom:5px;">Words Found</div>
-	<div style="border-style:solid; border-width:1px">
-		<ul><li ng-repeat="word in words"><span ng-show='word.show' ng-class="{'strike': word.strike}">{{word.word}}</span></li></ul>
+	<div class="bordered" style="padding-left:5px; padding-top:5px; padding-bottom:5px">Words Found <i class="fa fa-question-circle" title="This is where the list of synonyms will show up. Every few seconds without a guess, one of the words' letters will be shown."></i></div>
+	<div class="bordered" data-step="3" data-intro="A list of possible synonyms will show up here. The words will be blank until you guess them, or they are revealed over the course of the game.">
+		<ul><li ng-repeat="word in words"><span ng-class="{'strike': word.strike}">{{word.dummy}}</span></li></ul>
+	</div>
+	<div class="bordered" style="background-color:#FFD633; margin-top:20px; padding-left:5px; padding-right:5px" data-step="8" data-intro="Look here for a refresher on the rules if you need to. Now, let's start the game!">
+		<p>Click the button to show a word. You will have 90 seconds to try and guess as many synonyms of that word as you can. After 7 seconds without a guess, one of the words will have a part of it revealed.</p>
+		<p>Guessing a synonym correctly will result a number of points based on how much of the word has ben revealed.</p>
 	</div>
 </div>
 
 <div class="column-center">
-	<h1>{{input}}</h1>
+	<span style="float:right" data-step="5" data-intro="This is how much time you have left for each word. You start with 90 seconds, and every few seconds without a guess reveals a letter of one of the words in the list.">{{seconds}} seconds left <i class="fa fa-question-circle" title="Every word will have 90 seconds to guess as many synonyms as you can."></i></span>
+	<h1>{{myWord}}</h1>
 	<p>{{definition}}</p>
-	<timer start="6" on-done="outOfTime" run="runTimer"></timer>
 
-	<form ng-submit="fetchData()">
-		<input type="text" ng-model="input" placeholder="Input word here">
-	</form>
+	<div ng-show="showSubmit">
+		<button ng-click="fetchData()" data-step="2" data-intro="Clicking this button will start the game by showing the first word in the list.">Next word</button>
+	</div>
 
-	<div ng-show="toShow">
-		<input type="text" ng-model="input2">
+	<div ng-show="showCompare">
+		<i class="fa fa-question-circle" title="Type in a word here and click the button to see if it is a correct synonym."></i>
+		<input type="text" ng-model="input">
 		<button ng-click="compare()">Compare to the list</button>
 		<h1>{{status}}</h1>
 	</div>
 </div>
 
 <div class="column-right">
-	<div style="border-style:solid; border-width:1px; padding-top:10px; padding-bottom:10px">{{points}} Points</div>
-	<div style="border-style:solid; border-width:1px; padding-top:5px; padding-bottom:5px; margin-top:20px">Leaderboard</div>
-	<div style="border-style:solid; border-width:1px">
-		<p>Players in the session will go here...</p>
+	<div class="bordered" style="padding-left:5px; padding-top:10px; padding-bottom:10px" data-step="6" data-intro="This is your score. Correct guesses are worth a number of points based on how long the word is and how much of it is shown.">
+		<b>{{animals[userid].name}}</b></br>{{points}} Points <i class="fa fa-question-circle" title="Correct guesses are worth a number of points based on how long the word is and how much of it is shown."></i></div>
+	<div class="bordered" style="padding-left:5px; padding-top:5px; padding-bottom:5px; margin-top:20px">Leaderboard <i class="fa fa-question-circle" title="Here you will see all of the other people currently playing the game. Try to get the highest score!"></i></div>
+	<div style="border-style:solid; border-width:1px; border-color:gray" data-step="7" data-intro="This is the leaderboard, where you will see yourself and everyone else who's playing. Try to get the highest score!">
+		<p style="padding-left:5px" ng-repeat="player in players">{{player.userid | playerFilter:userid:this}} -- {{player.points}} Points</p>
 	</div>
 </div>

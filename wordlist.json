@@ -1,0 +1,24 @@
+{
+"data": [
+	{ "word":"smart", "synonyms": [
+		{"syn":"astute"}, {"syn":"brainy"}, {"syn":"bright"}, {"syn":"brilliant"}, {"syn":"canny"}, {"syn":"crafty"}, {"syn":"quick"}, {"syn":"sharp"}, {"syn":"shrewd"}, {"syn":"wise"}, {"syn":"intelligent"}, {"syn":"genius"}
+	]},
+	{ "word":"story", "synonyms": [
+		{"syn":"adventure"}, {"syn":"book"}, {"syn":"drama"}, {"syn":"fantasy"}, {"syn":"fiction"}, {"syn":"legend"}, {"syn":"myth"}, {"syn":"novel"}, {"syn":"record"}, {"syn":"report"}, {"syn":"tale"}, {"syn":"chronicle"}, {"syn":"saga"}
+	]},
+	{ "word":"little", "synonyms": [
+		{"syn":"scant"}, {"syn":"dinky"}, {"syn":"junior"}, {"syn":"light"}, {"syn":"mini"}, {"syn":"miniature"}, {"syn":"petite"}, {"syn":"short"}, {"syn":"wee"}, {"syn":"small"}, {"syn":"teeny"}, {"syn":"tiny"}
+	]},
+	{ "word":"fast", "synonyms": [
+		{"syn":"brisk"}, {"syn":"nimble"}, {"syn":"quick"}, {"syn":"rapid"}, {"syn":"swift"}, {"syn":"fleet"}, {"syn":"racing"}, {"syn":"snappy"}, {"syn":"hasty"}, {"syn":"pronto"}
+	]},
+	{ "word":"friend", "synonyms": [
+		{"syn":"acquaintance"}, {"syn":"ally"}, {"syn":"associate"}, {"syn":"buddy"}, {"syn":"companion"}, {"syn":"partner"}, {"syn":"chum"}, {"syn":"comrade"}, {"syn":"mate"}, {"syn":"pal"}, {"syn":"playmate"}, {"syn":"sidekick"}
+	]},
+	{ "word":"jump", "synonyms": [
+		{"syn":"bounce"}, {"syn":"bound"}, {"syn":"dive"}, {"syn":"hop"}, {"syn":"skip"}, {"syn":"vault"}, {"syn":"buck"}, {"syn":"hurdle"}, {"syn":"lunge"}, {"syn":"lurch"}, {"syn":"pop"}, {"syn":"somersault"}, {"syn":"leap"}
+	]},
+	{ "word":"amazing", "synonyms": [
+		{"syn":"awesome"}, {"syn":"incredible"}, {"syn":"marvelous"}, {"syn":"stunning"}, {"syn":"surprising"}, {"syn":"unbelievable"}, {"syn":"wonderful"}, {"syn":"stupendous"}, {"syn":"astounding"}
+	]}
+]}

@@ -1,0 +1,52 @@
+{
+  "name": "intro.js",
+  "description": "Better introductions for websites and features with a step-by-step guide for your projects",
+  "version": "0.9.0",
+  "author": {
+    "name": "Afshin Mehrabani",
+    "email": "afshin.meh@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/usablica/intro.js"
+  },
+  "devDependencies": {
+    "node-minify": "*"
+  },
+  "engine": [
+    "node >=0.1.90"
+  ],
+  "main": "intro.js",
+  "spm": {
+    "main": "intro.js",
+    "output": [
+      "introjs.css"
+    ]
+  },
+  "gitHead": "a25c722a78600a3e9cb1d70e00229a8e868a0db9",
+  "bugs": {
+    "url": "https://github.com/usablica/intro.js/issues"
+  },
+  "homepage": "https://github.com/usablica/intro.js",
+  "_id": "intro.js@0.9.0",
+  "scripts": {},
+  "_shasum": "5972d9ee47dd844689d2911f44650a1cce20ce11",
+  "_from": "intro.js@*",
+  "_npmVersion": "1.4.16",
+  "_npmUser": {
+    "name": "ricardmo",
+    "email": "marco.ricard@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "ricardmo",
+      "email": "marco.ricard@gmail.com"
+    }
+  ],
+  "dist": {
+    "shasum": "5972d9ee47dd844689d2911f44650a1cce20ce11",
+    "tarball": "http://registry.npmjs.org/intro.js/-/intro.js-0.9.0.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/intro.js/-/intro.js-0.9.0.tgz"
+}
