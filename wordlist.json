@@ -20,5 +20,13 @@
 	]},
 	{ "word":"amazing", "synonyms": [
 		{"syn":"awesome"}, {"syn":"incredible"}, {"syn":"marvelous"}, {"syn":"stunning"}, {"syn":"surprising"}, {"syn":"unbelievable"}, {"syn":"wonderful"}, {"syn":"stupendous"}, {"syn":"astounding"}
-	]}
+	]},
+	{ "word":"beautiful", "synonyms": [
+		{"syn":"pretty"}, {"syn":"cute"}, {"syn":"elegant"}, {"syn":"dazzling"}, {"syn":"handsome"}, {"syn":"charming"}, {"syn":"fine"}, {"syn":"lovely"}, {"syn":"stunning"}, {"syn":"exquisite"}
+	]},
+	{ "word":"hope", "synonyms": [
+		{"syn":"belief"}, {"syn":"ambition"}, {"syn":"goal"}, {"syn":"faith"}, {"syn":"wish"}, {"syn":"expectation"}, {"syn":"desire"}, {"syn":"optimism"}, {"syn":"dream"}
+	]},
+	{ "word":"difference", "synonyms": [
+		{"syn":"change"}, {"syn":"contrast"}, {"syn":"disparity"}, {"syn":"distinction"}, {"syn":"divergence"}, {"syn":"diversity"}, {"syn":"inequality"}, {"syn":"variation"}
 ]}
