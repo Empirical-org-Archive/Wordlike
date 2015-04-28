@@ -93,6 +93,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 
 				if(!$scope.words[i].strike){
 					$scope.status = "Good job!";
+					$scope.input = "";
 					$scope.words[i].dummy = $scope.words[i].word;
 					$scope.words[i].strike = true;
 					$scope.points += $scope.words[i].word.length - $scope.words[i].toSwap;
@@ -103,12 +104,14 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 				}
 				else {
 					$scope.status = "You entered that word already. Try again.";
+					$scope.input = "";
 					return;
 				}
 			}
 		};
 
 		$scope.status = "That word didn't work. Try again.";
+		$scope.input = "";
 	};
 
 		//Helper functions
@@ -170,7 +173,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 
 	var timerStart = function() {
 
-		$scope.seconds = 90;
+		$scope.seconds = 30;
 		active = true;
 
 		if (intervalPromise == null) {intervalPromise = $interval(timerTick, 1000);}
@@ -193,7 +196,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 	        	timerStop();
 	        	outOfTime();
 			}
-			else if(inactionCounter == 7) {
+			else if(inactionCounter == 1) {
 				inactionTrigger();
 			}
 		}
