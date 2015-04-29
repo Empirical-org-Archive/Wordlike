@@ -76,7 +76,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 			};
 			
 			synTracker[i] = i;
-			$scope.words[i] = {word: $scope.wordlist[listIndex].synonyms[i].syn, dummy:blanks, toSwap:0, strike: false};
+			$scope.words[i] = {word: $scope.wordlist[listIndex].synonyms[i].syn, dummy:blanks, toSwap:0, strike:false, points:""};
 		}
 
 		$scope.showCompare = true;
@@ -86,6 +86,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 	$scope.compare = function() {
 
 		inactionCounter = 0;
+		$scope.input = $scope.input.toLowerCase();
 
 		for (var i = $scope.words.length - 1; i >= 0; i--) {
 
@@ -97,6 +98,8 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 					$scope.words[i].dummy = $scope.words[i].word;
 					$scope.words[i].strike = true;
 					$scope.points += $scope.words[i].word.length - $scope.words[i].toSwap;
+					$scope.words[i].points = "+ " + ($scope.words[i].word.length - $scope.words[i].toSwap);
+
 					userRef.update({points: $scope.points});
 
 					trackerRemove(i);

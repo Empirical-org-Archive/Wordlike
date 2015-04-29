@@ -1,7 +1,7 @@
 <div class="column-left">
 	<div class="bordered" style="padding-left:5px; padding-top:5px; padding-bottom:5px">Words Found <i class="fa fa-question-circle" title="This is where the list of synonyms will show up. Every second without a guess, one of the words' letters will be shown."></i></div>
 	<div class="bordered" data-step="3" data-intro="A list of possible synonyms will show up here. The words will be blank until you guess them, or they are revealed over the course of the game.">
-		<ul><li ng-repeat="word in words"><span ng-class="{'strike': word.strike}"><b>{{word.dummy}}</b></span></li></ul>
+		<ul><li ng-repeat="word in words"><span ng-class="{'strike': word.strike}"><b>{{word.dummy}}</span>     <font color="green">{{word.points}}</font></b></li></ul>
 	</div>
 	<div class="bordered" style="background-color:#FFD633; margin-top:20px; padding-left:5px; padding-right:5px" data-step="8" data-intro="Look here for a refresher on the rules if you need to. Now, let's start the game!">
 		<p>Click the button to show a word. You will have 30 seconds to try and guess as many synonyms of that word as you can. After every second without a guess, one of the words will have a part of it revealed.</p>
