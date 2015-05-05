@@ -28,13 +28,6 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 		intro.start();
     });
 
-	//URLs
-	var URL = "https://api.wordnik.com/v4/word.json/"; //Wordnik
-	var filter = "/definitions?limit=200&includeRelated=true&useCanonical=false&includeTags=false&api_key="; //Wordnik
-
-	//Demo keys
-	var api_key = "a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5"; //Wordnik
-
 	var inactionCounter = 0;
 
 	$scope.points = 0;
@@ -56,16 +49,6 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 
 		$scope.showSubmit = false;
 
-		$scope.status = "Fetching definition..."
-
-		//Wordnik
-		$http.get(URL + $scope.wordlist[listIndex].word + filter + api_key)
-		.success(function(response) {
-			$scope.definition = response[0].text;
-			$scope.status = "";
-			timerStart();
-		});
-
 		$scope.words = [];
 
 		for (var i = 0; i <= $scope.wordlist[listIndex].synonyms.length - 1; i++) {
@@ -81,6 +64,9 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 
 		$scope.showCompare = true;
 		$scope.myWord = $scope.wordlist[listIndex].word;
+		$scope.definition = $scope.wordlist[listIndex].definition;
+		$scope.status = "";
+		timerStart();
 	};
 
 	$scope.compare = function() {
@@ -176,7 +162,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 
 	var timerStart = function() {
 
-		$scope.seconds = 30;
+		$scope.seconds = 45;
 		active = true;
 
 		if (intervalPromise == null) {intervalPromise = $interval(timerTick, 1000);}

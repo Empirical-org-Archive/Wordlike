@@ -4,13 +4,13 @@
 		<ul><li ng-repeat="word in words"><span ng-class="{'strike': word.strike}"><b>{{word.dummy}}</span>     <font color="green">{{word.points}}</font></b></li></ul>
 	</div>
 	<div class="bordered" style="background-color:#FFD633; margin-top:20px; padding-left:5px; padding-right:5px" data-step="8" data-intro="Look here for a refresher on the rules if you need to. Now, let's start the game!">
-		<p>Click the button to show a word. You will have 30 seconds to try and guess as many synonyms of that word as you can. After every second without a guess, one of the words will have a part of it revealed.</p>
+		<p>Click the button to show a word. You will have 45 seconds to try and guess as many synonyms of that word as you can. After every second without a guess, one of the words will have a part of it revealed.</p>
 		<p>Guessing a synonym correctly will result a number of points based on how much of the word has ben revealed.</p>
 	</div>
 </div>
 
 <div class="column-center">
-	<span data-step="5" data-intro="This is how much time you have left for each word. You start with 30 seconds, and every second without a guess reveals a letter of one of the words in the list.">{{seconds}} seconds left <i class="fa fa-question-circle" title="Every word will have 30 seconds to guess as many synonyms as you can."></i></span>
+	<span data-step="5" data-intro="This is how much time you have left for each word. You start with 45 seconds, and every second without a guess reveals a letter of one of the words in the list.">{{seconds}} seconds left <i class="fa fa-question-circle" title="Every word will have 45 seconds to guess as many synonyms as you can."></i></span>
 	<h1>{{myWord}}</h1>
 	<p>{{definition}}</p>
 

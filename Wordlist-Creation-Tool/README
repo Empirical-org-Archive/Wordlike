@@ -1,0 +1,19 @@
+This tool is meant to help you create your own JSON wordlist files to use with the main app. As is, it is a quick and dirty solution to this problem, and has virtually no failsafes, do-overs, or polish. It can and will be improved in time, but until then, just follow the instructions very carefully...
+
+(1) Open the tool in any browser.
+
+(2) The beginning of the JSON file is already prepared in the text field. To make a new word to add to the list, fill in the "Input Word" and "Input Definition" fields near the bottom.
+
+(3) For every synonym you want to associate with that word, type it in the "Input Synonym" field and click the "Add Synonym" button. You will notice that the contents of the new entry will appear in the upper right.
+
+(4) Once you've added all of the synonyms you want, check over the information in the upper right to make sure it's to your satisfaction. Then click the "Make Entry" button to add it to the JSON file.
+
+(5) Repeat steps 2-4 as necessary.
+
+(6) If you're done making the word list, click the "Finish" button at the bottom to cap off the JSON string.
+
+(7) Highlight the entirety of the text in the textfield, right click, and copy it.
+
+(8) Open the "wordlist.json" file in a text editor (or make an empty text file and rename it later) and paste the contents inside.
+
+(9) And you're done! If you followed the above steps without any errors, make sure the file you want to test in the app is named "wordlist.json" and give it a go!

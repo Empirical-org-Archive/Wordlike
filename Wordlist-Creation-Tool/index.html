@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<meta charset="UTF-8"> 
+<html>
+	<head>
+ 		<title>WordLike Generator</title>
+ 		<style>
+ 			
+ 		</style>
+	</head>
+
+	<body ng-app="synonymTool" ng-controller="ToolCtrl">
+
+		<button ng-click="addEntry()" style="float:right">Make Entry</button>
+
+		<div style="float:right">
+			<ul>SYNONYMS<br><br><li ng-repeat="synonym in synonyms">{{synonym}}</li></ul>
+		</div>
+
+		<div style="float:right">
+			DEFINITION<br><br>{{definitionInput}}
+		</div>
+
+		<div style="float:right; margin-right:10px">
+			WORD<br><br>{{wordInput}}
+		</div>
+
+		<div>
+	 		<textarea style="height:500px; width:500px" readonly="true">{{data}}</textarea>
+<br>
+			<input ng-model="wordInput"></input> Input Word
+<br>
+	 		<input ng-model="definitionInput"></input> Input Definition
+<br>
+	 		<input ng-model="synonymInput"></input> Input Synonyms <button ng-click="addSynonym()">Add Synonym</button>
+<br>
+			<button ng-click="finish()">Finish</button>
+		</div>
+
+   		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+   		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+   		<script src="https://cdn.firebase.com/js/client/2.2.3/firebase.js"></script>
+   		<script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
+   		<script type="text/javascript" src="main.js"></script>
+	</body>
+</html>
