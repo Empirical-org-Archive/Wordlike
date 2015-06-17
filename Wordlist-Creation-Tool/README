@@ -1,5 +1,11 @@
 This tool is meant to help you create your own JSON wordlist files to use with the main app. As is, it is a quick and dirty solution to this problem, and has virtually no failsafes, do-overs, or polish. It can and will be improved in time, but until then, just follow the instructions very carefully...
 
+==Download the Tool==
+(1) From this page, click download Zip. https://github.com/empirical-org/Synonyms
+
+(2) Open the folder, Open WordList creation tool, and click on "index.html"
+
+==Build the JSON data==
 (1) Open the tool in any browser.
 
 (2) The beginning of the JSON file is already prepared in the text field. To make a new word to add to the list, fill in the "Input Word" and "Input Definition" fields near the bottom.
