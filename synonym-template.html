@@ -1,3 +1,10 @@
+<section id="level-select" ng-show="showLevelSelect">
+	<div>LEVEL 1</div>
+	<div>LEVEL 2</div>
+	<div>LEVEL 3</div>
+
+</section>
+<section id="game" ng-show="showGame">
 <div class="column-left">
 	<div class="bordered" style="padding-left:5px; padding-top:5px; padding-bottom:5px">Words Found <i class="fa fa-question-circle" title="This is where the list of synonyms will show up. Every second without a guess, one of the words' letters will be shown."></i></div>
 	<div class="bordered" data-step="3" data-intro="A list of possible synonyms will show up here. The words will be blank until you guess them, or they are revealed over the course of the game.">
@@ -21,7 +28,7 @@
 	<div ng-show="showCompare">
 		<form ng-submit="compare()">
 			<i class="fa fa-question-circle" title="Type in a word here and click the button to see if it is a correct synonym."></i>
-			<input type="text" ng-model="input">
+			<input id="main-input" type="text" ng-model="input">
 			<button>Compare to the list</button>
 		</form>
 		<h1>{{status}}</h1>
@@ -36,3 +43,4 @@
 		<p style="padding-left:5px" ng-repeat="player in players">{{player.userid | playerFilter:userid:this}} -- {{player.points}} Points</p>
 	</div>
 </div>
+</section>

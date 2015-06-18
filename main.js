@@ -10,6 +10,8 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 
 	$scope.userid = Math.round(Math.random() * 586);
 	$scope.animals = [];
+	$scope.showLevelSelect = false;
+	$scope.showGame = true;
 	$http.get("animals.json").success(function(response) { $scope.animals = response.data; });
 
 	var amOnline = new Firebase('https://synonymtest1.firebaseio.com/.info/connected');
@@ -46,6 +48,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 	.success(function(response) {$scope.wordlist = response.data;});
 
 	$scope.fetchData = function() {
+		setInputState(false);
 
 		$scope.showSubmit = false;
 
@@ -57,7 +60,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 			for (var j = 0; j <= $scope.wordlist[listIndex].synonyms[i].syn.length - 1; j++) {
 				blanks += "-"
 			};
-			
+
 			synTracker[i] = i;
 			$scope.words[i] = {word: $scope.wordlist[listIndex].synonyms[i].syn, dummy:blanks, toSwap:0, strike:false, points:""};
 		}
@@ -103,6 +106,19 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 		$scope.input = "";
 	};
 
+	$scope.switchState = function(){
+		if($scope.showLevelSelect == true){
+			$scope.showGame = true;
+			$scope.showLevelSelect = false;
+		}
+		else{
+			$scope.showGame = false;
+			$scope.showLevelSelect = true;
+		}
+
+
+	}
+
 		//Helper functions
 
 	//Custom string character replace function
@@ -130,7 +146,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 		var item = $scope.words[synTracker[wordIndex]];
 		item.dummy = replaceAt(item.dummy, item.toSwap, item.word.charAt(item.toSwap));
 		item.toSwap++;
-		console.log(item.toSwap);
+		//console.log(item.toSwap);
 
 		if(item.toSwap == item.word.length - 1) {
 
@@ -145,7 +161,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 		inactionCounter = 0;
 
 		for (var i = $scope.words.length - 1; i >= 0; i--) {
-			
+
 			$scope.words[i].dummy = $scope.words[i].word;
 			$scope.words[i].toSwap = $scope.words[i].word.length - 1;
 		}
@@ -184,12 +200,24 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 			if($scope.seconds === 0) {
 	        	timerStop();
 	        	outOfTime();
+						setInputState(true);
 			}
 			else if(inactionCounter == 1) {
 				inactionTrigger();
 			}
 		}
 	}
+	//sets the input to disabled (greys it out)
+	var setInputState = function(state){
+
+
+
+			$("#main-input").prop('disabled', state)
+
+
+	}
+
+
 	intervalPromise = $interval(timerTick, 1000);
 
 
@@ -218,7 +246,7 @@ app.directive('appdir', function ($templateCache) {
 app.filter('playerFilter', ['$http', function($http) {
 	return function(input, userid, scope) {
 
-		if (scope.animals[input]) { 
+		if (scope.animals[input]) {
 			var out = scope.animals[input].name;
 
 			if(input == userid) {
