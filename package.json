@@ -1,0 +1,25 @@
+{
+  "name": "quill-wordlike",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "intro.js": "^0.9.0"
+  },
+  "devDependencies": {
+    "http-server": "^0.8.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/empirical-org/Synonyms.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/empirical-org/Synonyms/issues"
+  },
+  "homepage": "https://github.com/empirical-org/Synonyms#readme"
+}
