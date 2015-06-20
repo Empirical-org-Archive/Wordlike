@@ -1,0 +1,12 @@
+{
+"data": [
+	{ "word":"beautiful", "definition":"possessing qualities that give great pleasure or satisfaction to see", "synonyms": [
+		{"syn":"pretty"}, {"syn":"cute"}, {"syn":"elegant"}, {"syn":"dazzling"}, {"syn":"handsome"}, {"syn":"charming"}, {"syn":"fine"}, {"syn":"lovely"}, {"syn":"stunning"}, {"syn":"exquisite"}
+	]},
+	{ "word":"hope", "definition":"the feeling that what is wanted can be had or that events will turn out for the best", "synonyms": [
+		{"syn":"belief"}, {"syn":"ambition"}, {"syn":"goal"}, {"syn":"faith"}, {"syn":"wish"}, {"syn":"expectation"}, {"syn":"desire"}, {"syn":"optimism"}, {"syn":"dream"}
+	]},
+	{ "word":"difference", "definition":"a distinguishing characteristic between one thing and another", "synonyms": [
+		{"syn":"change"}, {"syn":"contrast"}, {"syn":"disparity"}, {"syn":"distinction"}, {"syn":"divergence"}, {"syn":"diversity"}, {"syn":"inequality"}, {"syn":"variation"}
+	]}
+]}

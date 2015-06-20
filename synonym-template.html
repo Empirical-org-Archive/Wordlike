@@ -1,7 +1,7 @@
 <section id="level-select" ng-show="showLevelSelect">
-	<div>LEVEL 1</div>
-	<div>LEVEL 2</div>
-	<div>LEVEL 3</div>
+	<div ng-click="switchState(); getLevelData(1)">LEVEL 1</div>
+	<div ng-click="switchState(); getLevelData(2)">LEVEL 2</div>
+	<div ng-click="switchState(); getLevelData(3)">LEVEL 3</div>
 
 </section>
 <section id="game" ng-show="showGame">
@@ -18,6 +18,7 @@
 
 <div class="column-center">
 	<span data-step="5" data-intro="This is how much time you have left for each word. You start with 45 seconds, and every second without a guess reveals a letter of one of the words in the list.">{{seconds}} seconds left <i class="fa fa-question-circle" title="Every word will have 45 seconds to guess as many synonyms as you can."></i></span>
+	<h3>{{currentLevelInfo.levelName}} , Word {{wordnumber}} </h3>
 	<h1>{{myWord}}</h1>
 	<p>{{definition}}</p>
 
