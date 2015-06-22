@@ -8,7 +8,7 @@
 <div class="column-left">
 	<div class="bordered" style="padding-left:5px; padding-top:5px; padding-bottom:5px">Words Found <i class="fa fa-question-circle" title="This is where the list of synonyms will show up. Every second without a guess, one of the words' letters will be shown."></i></div>
 	<div class="bordered" data-step="3" data-intro="A list of possible synonyms will show up here. The words will be blank until you guess them, or they are revealed over the course of the game.">
-		<ul><li ng-repeat="word in words"><span ng-class="{'strike': word.strike}"><b>{{word.dummy}}</span>     <font color="green">{{word.points}}</font></b></li></ul>
+		<ul><li ng-repeat="word in words"><spanresult a number ng-class="{'strike': word.strike}"><b>{{word.dummy}}</span>     <font color="green">{{word.points}}</font></b></li></ul>
 	</div>
 	<div class="bordered" style="background-color:#FFD633; margin-top:20px; padding-left:5px; padding-right:5px" data-step="8" data-intro="Look here for a refresher on the rules if you need to. Now, let's start the game!">
 		<p>Click the button to show a word. You will have 45 seconds to try and guess as many synonyms of that word as you can. After every second without a guess, one of the words will have a part of it revealed.</p>
@@ -17,7 +17,7 @@
 </div>
 
 <div class="column-center">
-	<span data-step="5" data-intro="This is how much time you have left for each word. You start with 45 seconds, and every second without a guess reveals a letter of one of the words in the list.">{{seconds}} seconds left <i class="fa fa-question-circle" title="Every word will have 45 seconds to guess as many synonyms as you can."></i></span>
+	<span data-step="5" data-intro="This is how much time you have left for each word. You start with 45 seconds, and every second without a guess reveals a letter of one of the words in the list.">{{secondsCounter}} seconds left <i class="fa fa-question-circle" title="Every word will have 45 seconds to guess as many synonyms as you can."></i></span>
 	<h3>{{currentLevelInfo.levelName}} , Word {{wordnumber}} </h3>
 	<h1>{{myWord}}</h1>
 	<p>{{definition}}</p>
@@ -33,6 +33,12 @@
 			<button>Compare to the list</button>
 		</form>
 		<h1>{{status}}</h1>
+	</div>
+	<div id="backbutton-div">
+		<button ng-click="switchState()">Back to Level Select</button>
+	</div>
+	<div ng-show="showNextLevelButton">
+		<button ng-click="changeLevel()">Next Level</button>
 	</div>
 </div>
 

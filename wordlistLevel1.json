@@ -2,6 +2,9 @@
 "data": [
 	{ "word":"bad", "definition":"of poor quality; inferior or defective.", "synonyms": [
 		{"syn":"evil"}, {"syn":"immoral"}, {"syn":"corrupt"}, {"syn":"rotten"}, {"syn":"harmful"}, {"syn":"inferior"}, {"syn":"spoiled"}, {"syn":"wicked"}
+	]},
+	{ "word":"difference", "definition":"a distinguishing characteristic between one thing and another", "synonyms": [
+		{"syn":"change"}, {"syn":"contrast"}, {"syn":"disparity"}, {"syn":"distinction"}, {"syn":"divergence"}, {"syn":"diversity"}, {"syn":"inequality"}, {"syn":"variation"}
 	]}
 
 ]}

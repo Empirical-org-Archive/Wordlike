@@ -12,6 +12,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 	$scope.animals = [];
 	$scope.showLevelSelect = true;
 	$scope.showGame = false;
+	$scope.showNextLevelButton = false;
 	$http.get("animals.json").success(function(response) { $scope.animals = response.data; });
 
 	var amOnline = new Firebase('https://synonymtest1.firebaseio.com/.info/connected');
@@ -31,9 +32,10 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
     });
 
 	var inactionCounter = 0;
+	var totalTimePerWord = 10;
 
 	$scope.points = 0;
-	$scope.seconds = 0;
+	$scope.secondsCounter = 0;
 	$scope.showSubmit = true;
 	$scope.showCompare = false;
 
@@ -48,7 +50,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 	var leveList;//used for storing the list of levels from the JSON file
 	$scope.currentLevelInfo = {};//used to store the all the info about the level retreived from the json file
 
-
+	$scope.showSubmit = true;
 	//gets the level list from JSON and stores it
 	$http.get('LevelList.json').success(function(response) {levelList = response.levels;});
 	//getLevelData(), gets the level from the level number specified
@@ -61,13 +63,11 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 
 				}
 			}
+			console.log($scope.currentLevelInfo);
 			//gets the json file and sets it to the word list
 			$http.get($scope.currentLevelInfo.levelFile).success(function(response) {$scope.wordlist = response.data;});
 
 	}
-
-
-
 
 	$scope.fetchData = function() {
 
@@ -81,11 +81,20 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 
 			var blanks = "";
 			for (var j = 0; j <= $scope.wordlist[listIndex].synonyms[i].syn.length - 1; j++) {
-				blanks += "-"
+
+				if(j==0)
+				{
+					blanks += $scope.wordlist[listIndex].synonyms[i].syn.substring(0,1)
+				}
+				else
+				{
+					blanks += "-"
+				}
+
 			};
 
 			synTracker[i] = i;
-			$scope.words[i] = {word: $scope.wordlist[listIndex].synonyms[i].syn, dummy:blanks, toSwap:0, strike:false, points:""};
+			$scope.words[i] = {word: $scope.wordlist[listIndex].synonyms[i].syn, dummy:blanks, toSwap:1, strike:false, points:""};
 		}
 
 		$scope.showCompare = true;
@@ -132,23 +141,50 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 
 	$scope.switchState = function(){
 		if($scope.showLevelSelect == true){
+			$scope.resetLevel();
 			$scope.showGame = true;
 			$scope.showLevelSelect = false;
+			listIndex = 0;
+			synTracker = [];
 		}
 		else{
+			$scope.resetLevel()
 			$scope.showGame = false;
-			$scope.showLevelSelect = true;
-		}
+			$scope.showLevelSelect = true;		}
 
 
 	}
+	$scope.resetLevel = function(){
+		timerStop();
+		$scope.showSubmit = true;
+		$scope.showNextLevelButton = false;
+		$scope.wordnumber = 0;
+		$scope.secondsCounter = totalTimePerWord;
+		$scope.wordlist = [];
+		$scope.words = [];
+		$scope.status = '';
+		$scope.myWord = '';
+		$scope.definition = '';
+		listIndex = 0;
+		synTracker = [];
+	}
+
+	$scope.changeLevel = function(){
+
+		$scope.resetLevel();
+		$scope.getLevelData($scope.currentLevelInfo.levelNumber + 1);
+		$scope.status = "Next Level";
+
+
+	}
+
 
 		//Helper functions
 	//checks to see if there is a next level
 	//returns true when there is a next level, returns false when there is not
 	var checkIfNextLevel = function(levelL){
-		console.log(levelL.length);
-		var levelAmount = levelL.length;
+
+		var levelAmount = levelL.length - 1;
 		if(levelL[levelAmount].levelNumber != $scope.currentLevelInfo.levelNumber)
 		{
 			return true;
@@ -158,6 +194,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 			return false
 		}
 	}
+
 
 	//Custom string character replace function
 	var replaceAt = function(str, index, chr) {
@@ -208,10 +245,12 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 
 			if(checkIfNextLevel(levelList) == true)
 			{
-				$scope.myWord = "next level";
+				console.log("there is a next level");
+				$scope.showNextLevelButton = true;
+
 			}
 			else {
-				$scope.myWord = "No More Levels";
+
 			}
 
 
@@ -223,7 +262,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 
 	var timerStart = function() {
 
-		$scope.seconds = 10;
+		$scope.secondsCounter = totalTimePerWord;
 		active = true;
 
 		if (intervalPromise == null) {intervalPromise = $interval(timerTick, 1000);}
@@ -239,10 +278,10 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 	var timerTick = function() {
 
 		if(active) {
-			$scope.seconds--;
+			$scope.secondsCounter--;
 			inactionCounter++;
 
-			if($scope.seconds === 0) {
+			if($scope.secondsCounter === 0) {
 	        	timerStop();
 	        	outOfTime();
 						setInputState(true);
@@ -254,8 +293,6 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 	}
 	//sets the input to disabled (greys it out)
 	var setInputState = function(state){
-
-
 
 			$("#main-input").prop('disabled', state)
 
