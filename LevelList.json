@@ -2,6 +2,8 @@
 "levels": [
 	{ "levelName":"Level 1", "altName":"L1", "levelNumber":1, "levelFile":"wordlistLevel1.json"  },
 	{ "levelName":"Level 2", "altName":"L2", "levelNumber":2, "levelFile":"wordlistLevel2.json"  },
-	{ "levelName":"Level 3", "altName":"L3", "levelNumber":3, "levelFile":"wordlistLevel3.json" }
+	{ "levelName":"Level 3", "altName":"L3", "levelNumber":3, "levelFile":"wordlistLevel3.json"  },
+	{ "levelName":"Level 4", "altName":"L4", "levelNumber":4, "levelFile":"wordlistLevel4.json"  },
+	{ "levelName":"Level 5", "altName":"L5", "levelNumber":5, "levelFile":"wordlistLevel5.json"  }
 
 ]}

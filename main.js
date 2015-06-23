@@ -32,7 +32,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
     });
 
 	var inactionCounter = 0;
-	var totalTimePerWord = 10;
+	var totalTimePerWord = 45;
 
 	$scope.points = 0;
 	$scope.secondsCounter = 0;
@@ -68,7 +68,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 			$http.get($scope.currentLevelInfo.levelFile).success(function(response) {$scope.wordlist = response.data;});
 
 	}
-
+	//used to parse the json file and place all objects into the word[] array
 	$scope.fetchData = function() {
 
 		setInputState(false);
@@ -104,7 +104,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 		$scope.wordnumber = listIndex + 1;
 		timerStart();
 	};
-
+	//used to compare word to user input
 	$scope.compare = function() {
 
 		inactionCounter = 0;
@@ -138,7 +138,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 		$scope.status = "That word didn't work. Try again.";
 		$scope.input = "";
 	};
-
+	//switches states between the level select screen and the game itself
 	$scope.switchState = function(){
 		if($scope.showLevelSelect == true){
 			$scope.resetLevel();
@@ -154,6 +154,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 
 
 	}
+	//this resets the level by reseting most of the game values
 	$scope.resetLevel = function(){
 		timerStop();
 		$scope.showSubmit = true;
@@ -168,7 +169,8 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 		listIndex = 0;
 		synTracker = [];
 	}
-
+	//this changes the level once the player has beaten the level
+	//this is called template with the Next Level Button
 	$scope.changeLevel = function(){
 
 		$scope.resetLevel();
@@ -183,7 +185,9 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 	//checks to see if there is a next level
 	//returns true when there is a next level, returns false when there is not
 	var checkIfNextLevel = function(levelL){
-
+		//gets the last level in the array of levels, and checks if that
+		//level is not equal to the current level.  If they are not equal,
+		//there is a next level
 		var levelAmount = levelL.length - 1;
 		if(levelL[levelAmount].levelNumber != $scope.currentLevelInfo.levelNumber)
 		{

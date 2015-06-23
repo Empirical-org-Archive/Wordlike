@@ -1,33 +1,15 @@
 {
 "data": [
-	{ "word":"smart", "definition":"having or showing quick intelligence or ready mental capability", "synonyms": [
-		{"syn":"astute"}, {"syn":"brainy"}, {"syn":"bright"}, {"syn":"brilliant"}, {"syn":"canny"}, {"syn":"crafty"}, {"syn":"quick"}, {"syn":"sharp"}, {"syn":"shrewd"}, {"syn":"wise"}, {"syn":"intelligent"}, {"syn":"genius"}, {"syn":"clever"}
+	{ "word":"retain", "definition":"continue to have (something); keep possession of.", "synonyms": [
+		{"syn":"keep"}, {"syn":"remember"}, {"syn":"withhold"}, {"syn":"recollect"}, {"syn":"contain"},
+		{"syn":"absorb"}, {"syn":"reserve"}, {"syn":"grasp"}, {"syn":"preserve"}, {"syn":"hold"}
 	]},
-	{ "word":"story", "definition":"a narrative, either true or fictitious, that is relayed to a reader or listener", "synonyms": [
-		{"syn":"adventure"}, {"syn":"book"}, {"syn":"drama"}, {"syn":"fantasy"}, {"syn":"fiction"}, {"syn":"legend"}, {"syn":"myth"}, {"syn":"narrative"}, {"syn":"novel"}, {"syn":"record"}, {"syn":"report"}, {"syn":"tale"}, {"syn":"chronicle"}, {"syn":"saga"}
+	{ "word":"monarch", "definition":"a sovereign head of state.", "synonyms": [
+		{"syn":"king"}, {"syn":"queen"}, {"syn":"prince"}, {"syn":"princess"}, {"syn":"ruler"},
+		{"syn":"leader"}, {"syn":"royal"}, {"syn":"majesty"}, {"syn":"despot"}, {"syn":"emperor"}
 	]},
-	{ "word":"little", "definition":"small in size or amount", "synonyms": [
-		{"syn":"scant"}, {"syn":"dinky"}, {"syn":"junior"}, {"syn":"light"}, {"syn":"mini"}, {"syn":"miniature"}, {"syn":"petite"}, {"syn":"short"}, {"syn":"wee"}, {"syn":"small"}, {"syn":"teeny"}, {"syn":"tiny"}
-	]},
-	{ "word":"fast", "definition":"moving, operating, or taking effect quickly", "synonyms": [
-		{"syn":"brisk"}, {"syn":"nimble"}, {"syn":"quick"}, {"syn":"rapid"}, {"syn":"swift"}, {"syn":"fleet"}, {"syn":"racing"}, {"syn":"snappy"}, {"syn":"hasty"}, {"syn":"pronto"}
-	]},
-	{ "word":"friend", "definition":"someone with feelings of attachment for another", "synonyms": [
-		{"syn":"acquaintance"}, {"syn":"ally"}, {"syn":"associate"}, {"syn":"buddy"}, {"syn":"companion"}, {"syn":"partner"}, {"syn":"chum"}, {"syn":"comrade"}, {"syn":"mate"}, {"syn":"pal"}, {"syn":"playmate"}, {"syn":"sidekick"}
-	]},
-	{ "word":"jump", "definition":"to spring clear of the ground by a sudden effort", "synonyms": [
-		{"syn":"bounce"}, {"syn":"bound"}, {"syn":"dive"}, {"syn":"hop"}, {"syn":"skip"}, {"syn":"vault"}, {"syn":"buck"}, {"syn":"hurdle"}, {"syn":"lunge"}, {"syn":"lurch"}, {"syn":"pop"}, {"syn":"spring"}, {"syn":"somersault"}, {"syn":"leap"}
-	]},
-	{ "word":"amazing", "definition":"causing great surprise or sudden wonder", "synonyms": [
-		{"syn":"awesome"}, {"syn":"incredible"}, {"syn":"marvelous"}, {"syn":"stunning"}, {"syn":"surprising"}, {"syn":"unbelievable"}, {"syn":"wonderful"}, {"syn":"stupendous"}, {"syn":"astounding"}
-	]},
-	{ "word":"beautiful", "definition":"possessing qualities that give great pleasure or satisfaction to see", "synonyms": [
-		{"syn":"pretty"}, {"syn":"cute"}, {"syn":"elegant"}, {"syn":"dazzling"}, {"syn":"handsome"}, {"syn":"charming"}, {"syn":"fine"}, {"syn":"lovely"}, {"syn":"stunning"}, {"syn":"exquisite"}
-	]},
-	{ "word":"hope", "definition":"the feeling that what is wanted can be had or that events will turn out for the best", "synonyms": [
-		{"syn":"belief"}, {"syn":"ambition"}, {"syn":"goal"}, {"syn":"faith"}, {"syn":"wish"}, {"syn":"expectation"}, {"syn":"desire"}, {"syn":"optimism"}, {"syn":"dream"}
-	]},
-	{ "word":"difference", "definition":"a distinguishing characteristic between one thing and another", "synonyms": [
-		{"syn":"change"}, {"syn":"contrast"}, {"syn":"disparity"}, {"syn":"distinction"}, {"syn":"divergence"}, {"syn":"diversity"}, {"syn":"inequality"}, {"syn":"variation"}
+	{ "word":"impressive", "definition":"evoking admiration through size, quality, or skill: grand, imposing, or awesome.", "synonyms": [
+		{"syn":"extraordinary"}, {"syn":"profound"}, {"syn":"remarkable"}, {"syn":"grand"}, {"syn":"moving"},
+		{"syn":"effective"}, {"syn":"well-done"}, {"syn":"awesome"}, {"syn":"superb"}, {"syn":"inspiring"}
 	]}
 ]}

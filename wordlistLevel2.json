@@ -1,12 +1,15 @@
 {
 "data": [
-	{ "word":"beautiful", "definition":"possessing qualities that give great pleasure or satisfaction to see", "synonyms": [
-		{"syn":"pretty"}, {"syn":"cute"}, {"syn":"elegant"}, {"syn":"dazzling"}, {"syn":"handsome"}, {"syn":"charming"}, {"syn":"fine"}, {"syn":"lovely"}, {"syn":"stunning"}, {"syn":"exquisite"}
+	{ "word":"perish", "definition":"suffer death, typically in a violent, sudden", "synonyms": [
+		{"syn":"die"}, {"syn":"decay"}, {"syn":"crumble"}, {"syn":"cease"}, {"syn":"wither"},
+		{"syn":"decline"}, {"syn":"succumb"}, {"syn":"decompose"}, {"syn":"decease"}, {"syn":"rot"}
 	]},
-	{ "word":"hope", "definition":"the feeling that what is wanted can be had or that events will turn out for the best", "synonyms": [
-		{"syn":"belief"}, {"syn":"ambition"}, {"syn":"goal"}, {"syn":"faith"}, {"syn":"wish"}, {"syn":"expectation"}, {"syn":"desire"}, {"syn":"optimism"}, {"syn":"dream"}
+	{ "word":"independent", "definition":"free from outside control; not depending on another's authority ", "synonyms": [
+		{"syn":"absolute"}, {"syn":"individualistic"}, {"syn":"free"}, {"syn":"uncontrolled"}, {"syn":"autonomous"},
+		{"syn":"unconstrained"}, {"syn":"separate"}, {"syn":"alone"}, {"syn":"unconnected"}
 	]},
-	{ "word":"difference", "definition":"a distinguishing characteristic between one thing and another", "synonyms": [
-		{"syn":"change"}, {"syn":"contrast"}, {"syn":"disparity"}, {"syn":"distinction"}, {"syn":"divergence"}, {"syn":"diversity"}, {"syn":"inequality"}, {"syn":"variation"}
+	{ "word":"mischief", "definition":"playfulness that is intended to tease, mock, or create trouble", "synonyms": [
+		{"syn":"trouble"}, {"syn":"prank"}, {"syn":"naughtiness"}, {"syn":"sneakiness"}, {"syn":"misbehavior"},
+		{"syn":"misbehavior"}, {"syn":"slyness"}, {"syn":"damage"}
 	]}
 ]}

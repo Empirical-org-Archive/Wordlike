@@ -1,0 +1,15 @@
+{
+"data": [
+	{ "word":"resemble", "definition":"have qualities or features, especially those of appearance, in common with (someone or something); look or seem like.", "synonyms": [
+		{"syn":"look like"}, {"syn":"parallel"}, {"syn":"mirror"}, {"syn":"match"}, {"syn":"echo"},
+		{"syn":"equal"}, {"syn":"duplicate"}, {"syn":"similar to"}, {"syn":"appear like"}, {"syn":"take after"}
+	]},
+	{ "word":"compassion", "definition":"concern for the sufferings or misfortunes of others.", "synonyms": [
+		{"syn":"empathy"}, {"syn":"grace"}, {"syn":"pity"}, {"syn":"sympathy"}, {"syn":"understanding"},
+		{"syn":"generocity"}, {"syn":"amity"}, {"syn":"sensitivity"}, {"syn":"mercy"}, {"syn":"humanity"}
+	]},
+	{ "word":"absurd", "definition":"wildly unreasonable.", "synonyms": [
+		{"syn":"crazy"}, {"syn":"illogical"}, {"syn":"crazy"}, {"syn":"ridiculous"}, {"syn":"silly"},
+		{"syn":"implausible"}, {"syn":"unreasonable"}, {"syn":"preposterous"}, {"syn":"irrational"}, {"syn":"stupid"}
+	]}
+]}
