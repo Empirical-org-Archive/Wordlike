@@ -1,4 +1,4 @@
-var app = angular.module("synonymApp", ["firebase"]);
+var app = angular.module("synonymApp", ["firebase", "ngSanitize", ]);
 
 app.run(function ($templateCache){
 
@@ -6,7 +6,7 @@ app.run(function ($templateCache){
 	$templateCache.put('synonym-mini-game.html', '');
 });
 
-app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$firebaseObject', '$firebaseArray', function ($scope, $http, $interval, $firebase, $firebaseObject, $firebaseArray) {
+app.controller("AppCtrl", ['$scope', '$http','$sce', '$compile', '$interval', '$firebase','$sanitize' , '$firebaseObject', '$firebaseArray', function ($scope, $http, $sce, $compile, $interval, $firebase, $sanitize, $firebaseObject, $firebaseArray) {
 
 	$scope.userid = Math.round(Math.random() * 586);
 	$scope.animals = [];
@@ -14,6 +14,12 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 	$scope.showGame = false;
 	$scope.showNextLevelButton = false;
 	$http.get("animals.json").success(function(response) { $scope.animals = response.data; });
+
+	$scope.levelListHTML = "";//used to store the html used to make the level list
+	var leveList;//used for storing the list of levels from the JSON file
+
+
+	$http.get('LevelList.json').success(function(response) {levelList = response.levels; $scope.levelListHTML = levelList.length});
 
 	var amOnline = new Firebase('https://synonymtest1.firebaseio.com/.info/connected');
 	var presenceRef = new Firebase('https://synonymtest1.firebaseio.com/presence/');
@@ -39,6 +45,8 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 	$scope.showSubmit = true;
 	$scope.showCompare = false;
 
+	$scope.htmlEleCounter = 1;
+
 	var intervalPromise = null;
 	var active = false;
 
@@ -47,12 +55,32 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 	var listIndex = 0;
 	var synTracker = [];
 
-	var leveList;//used for storing the list of levels from the JSON file
 	$scope.currentLevelInfo = {};//used to store the all the info about the level retreived from the json file
+
 
 	$scope.showSubmit = true;
 	//gets the level list from JSON and stores it
-	$http.get('LevelList.json').success(function(response) {levelList = response.levels;});
+
+
+
+
+		var generateLevelList = function()
+		{
+			var html = "";
+			var list = [];
+			for(var i = 0; i < levelList.length; i++){
+					html += "<level></level>";
+					console.log(html);
+
+
+			}
+			return html;
+		}
+
+
+
+
+
 	//getLevelData(), gets the level from the level number specified
 	$scope.getLevelData = function(level){
 			//checks all the members of the json file to see which level's LevlNumber matches the one specified in the parameter
@@ -200,6 +228,8 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 	}
 
 
+
+
 	//Custom string character replace function
 	var replaceAt = function(str, index, chr) {
 
@@ -320,6 +350,36 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 	});
 }]);
 
+app.directive("level", function($compile, $http){
+/*
+	return {
+		restrict: "E",
+		link: function($scope, element){
+			var template ="<button ng-click='switchState(); getLevelData("+$scope.htmlEleCounter+")'>LEVEL "+$scope.htmlEleCounter+"</button>";
+			var linkFn = $compile(template);
+			var content = linkFn($scope);
+			element.append(content);
+			$scope.htmlEleCounter++;
+		}
+	};*/
+	return function($scope, element, attrs){
+		var NumofLevels;
+		$http.get('LevelList.json').success(function(response) {
+			NumofLevels = response.levels.length;
+			console.log(NumofLevels);
+			for(var i = 0; i < NumofLevels; i++){
+			element.append($compile("<button ng-click='switchState(); getLevelData("+$scope.htmlEleCounter+")'>LEVEL "+$scope.htmlEleCounter+"</button>")($scope));
+			$scope.htmlEleCounter++;
+			}
+		});
+
+
+
+
+	};
+
+});
+
 app.directive('appdir', function ($templateCache) {
 
 	return {
@@ -328,6 +388,8 @@ app.directive('appdir', function ($templateCache) {
 		templateUrl: 'synonym-template.html'
 	};
 });
+
+
 
 app.filter('playerFilter', ['$http', function($http) {
 	return function(input, userid, scope) {
