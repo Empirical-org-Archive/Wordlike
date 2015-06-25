@@ -1,0 +1,15 @@
+{
+"data": [
+	{ "word":"sever", "definition":"divide by cutting or slicing, especially suddenly and forcibly.", "synonyms": [
+		{"syn":"detach"}, {"syn":"disconnect"}, {"syn":"separate"}, {"syn":"cleave"}, {"syn":"split"},
+		{"syn":"slice"}, {"syn":"break"}, {"syn":"disjoint"}, {"syn":"cut"}, {"syn":"bisect"}
+	]},
+	{ "word":"reign", "definition":"hold royal office; rule as king or queen.", "synonyms": [
+		{"syn":"dynasty"}, {"syn":"regime"}, {"syn":"tenure"}, {"syn":"power"}, {"syn":"sovereignty"},
+		{"syn":"control"}, {"syn":"empire"}, {"syn":"command"}, {"syn":"administer"}, {"syn":"prevail"}
+	]},
+	{ "word":"aggressive", "definition":"ready or likely to attack or confront.", "synonyms": [
+		{"syn":"offensive"}, {"syn":"hostile"}, {"syn":"bitter"}, {"syn":"nasty"}, {"syn":"combative"},
+		{"syn":"competetive"}, {"syn":"fierce"}, {"syn":"threatening"}, {"syn":"invading"}, {"syn":"disturbing"}
+	]}
+]}
