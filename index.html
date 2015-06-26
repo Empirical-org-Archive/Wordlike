@@ -13,24 +13,62 @@
  			.show {color: black;}
  			.strike {text-decoration: line-through;}
  			.bordered {border-style:solid; border-width:1px; border-color:gray;}
- 			.header {
- 				background-color:orange;
+ 			#header {
+ 				background-color:#00c2a2;
  				color:white;
- 				font-size:2em;
- 				text-align:center;
- 				margin-bottom:10px;
+				margin: 0px;
+				padding-top: 25px;
+				padding-bottom: 25px;
  			}
+			h2{
+				margin: 0px;
+			}
+			p{
+				margin: 0px;
+			}
+			#header p{
+				float: right;
+				padding-right: 25%;
+			}
+			#header img {
+				margin: 0px;
+				padding-top: 10px;
+			}
+			#header .level-select{
+				text-align: center;
+			}
+			#header .game-screen{
+				text-align: left;
+				padding-left: 25%;
+			}
+			#subheader{
+				background-color:#DDDDDD;
+				text-align:center;
+				margin-bottom:10px;
+				padding-bottom: 10px;
+			}
+			#subheader .level-select{
+				text-align:center;
+
+			}
+			#subheader .game-screen{
+				text-align:left;
+				padding-left: 25%;
+				padding-bottom: 20px;
+				padding-top: 20px;
+			}
+
+			button{
+				margin-right: 10px;
+			}
  			.column-left{ float: left; width: 16%; margin-right: 2%; margin-left: 2%}
 			.column-right{ float: right; width: 16%; margin-right: 2%; margin-left: 2%}
 			.column-center{ display: inline-block; width: 60%; }
  		</style>
 	</head>
 
-	<header>
-		<div class="header" data-step="1" data-intro="Welcome to Wordlike! This is a game that will test your knowledge of synonyms.">WordLike</div>
-	</header>
 
-	<body ng-app="synonymApp" ng-controller="AppCtrl">
+	<body style="margin:0px;" ng-app="synonymApp" ng-controller="AppCtrl">
 
  		<appdir></appdir>
 

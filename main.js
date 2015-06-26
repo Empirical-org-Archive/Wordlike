@@ -19,7 +19,7 @@ app.controller("AppCtrl", ['$scope', '$http','$sce', '$compile', '$interval', '$
 	var leveList;//used for storing the list of levels from the JSON file
 
 
-	$http.get('LevelList.json').success(function(response) {levelList = response.levels; $scope.levelListHTML = levelList.length});
+	$scope.LevelGetPromise = $http.get('LevelList.json').success(function(response) {levelList = response.levels; $scope.levelListHTML = levelList.length});
 
 	var amOnline = new Firebase('https://synonymtest1.firebaseio.com/.info/connected');
 	var presenceRef = new Firebase('https://synonymtest1.firebaseio.com/presence/');
@@ -45,8 +45,6 @@ app.controller("AppCtrl", ['$scope', '$http','$sce', '$compile', '$interval', '$
 	$scope.showSubmit = true;
 	$scope.showCompare = false;
 
-	$scope.htmlEleCounter = 1;
-
 	var intervalPromise = null;
 	var active = false;
 
@@ -60,25 +58,6 @@ app.controller("AppCtrl", ['$scope', '$http','$sce', '$compile', '$interval', '$
 
 	$scope.showSubmit = true;
 	//gets the level list from JSON and stores it
-
-
-
-
-		var generateLevelList = function()
-		{
-			var html = "";
-			var list = [];
-			for(var i = 0; i < levelList.length; i++){
-					html += "<level></level>";
-					console.log(html);
-
-
-			}
-			return html;
-		}
-
-
-
 
 
 	//getLevelData(), gets the level from the level number specified
@@ -227,9 +206,6 @@ app.controller("AppCtrl", ['$scope', '$http','$sce', '$compile', '$interval', '$
 		}
 	}
 
-
-
-
 	//Custom string character replace function
 	var replaceAt = function(str, index, chr) {
 
@@ -287,7 +263,6 @@ app.controller("AppCtrl", ['$scope', '$http','$sce', '$compile', '$interval', '$
 
 			}
 
-
 			return;
 		}
 
@@ -337,10 +312,6 @@ app.controller("AppCtrl", ['$scope', '$http','$sce', '$compile', '$interval', '$
 	intervalPromise = $interval(timerTick, 1000);
 
 
-
-
-
-
 	//Connetivity and Multiplayer stuff
 	amOnline.on('value', function(snapshot) {
    		if (snapshot.val()) {
@@ -350,31 +321,50 @@ app.controller("AppCtrl", ['$scope', '$http','$sce', '$compile', '$interval', '$
 	});
 }]);
 
+//this is used to create all of the buttons for all of the levels in the level select
 app.directive("level", function($compile, $http){
-/*
-	return {
-		restrict: "E",
-		link: function($scope, element){
-			var template ="<button ng-click='switchState(); getLevelData("+$scope.htmlEleCounter+")'>LEVEL "+$scope.htmlEleCounter+"</button>";
-			var linkFn = $compile(template);
-			var content = linkFn($scope);
-			element.append(content);
-			$scope.htmlEleCounter++;
-		}
-	};*/
 	return function($scope, element, attrs){
-		var NumofLevels;
-		$http.get('LevelList.json').success(function(response) {
+			var NumofLevels;
+			$scope.LevelGetPromise.success(function(response){
 			NumofLevels = response.levels.length;
-			console.log(NumofLevels);
 			for(var i = 0; i < NumofLevels; i++){
-			element.append($compile("<button ng-click='switchState(); getLevelData("+$scope.htmlEleCounter+")'>LEVEL "+$scope.htmlEleCounter+"</button>")($scope));
-			$scope.htmlEleCounter++;
+				//easy levels
+				if(i == 0){
+					element.append($compile("<table><tr><th>Easy</th></tr>")($scope));
+					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
+				}
+				if(i > 0 && i < 3){
+					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
+				}
+				if(i == 3){
+					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
+					element.append($compile("</table>")($scope));
+				}
+				//medium levels
+				if(i == 4){
+					element.append($compile("<table><tr><th>Medium</th></tr>")($scope));
+					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
+				}
+				if(i > 4 && i < 6){
+					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
+				}
+				if(i == 6){
+					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
+					element.append($compile("</table>")($scope));
+				}
+				//hard levels
+				if(i == 7){
+					element.append($compile("<table><tr><th>Hard</th></tr>")($scope));
+					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
+				}
+				if(i > 7 && i < 10){
+					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
+				}
+				if(i == 10){
+					element.append($compile("</table>")($scope));
+				}
 			}
 		});
-
-
-
 
 	};
 
