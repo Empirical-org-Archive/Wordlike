@@ -1,0 +1,119 @@
+body {font-family: 'Open Sans', sans-serif;}
+li {padding-top: 5px; padding-bottom:5px; white-space: pre}
+.blank {color: white;}
+.show {color: black;}
+.strike {text-decoration: line-through;}
+.bordered {border-style:solid; border-width:1px; border-color:gray;}
+#header {
+  background-color:#00c2a2;
+  color:white;
+ margin: 0px;
+ padding-top: 25px;
+ padding-bottom: 25px;
+}
+h2{
+ margin: 0px;
+}
+p{
+ margin: 0px;
+}
+#header p{
+ float: right;
+ padding-right: 25%;
+}
+#header img {
+ margin: 0px;
+ padding-top: 10px;
+}
+#header .level-select{
+ text-align: center;
+}
+#header .game-screen{
+ text-align: left;
+ padding-left: 25%;
+}
+#subheader{
+ background-color:#DDDDDD;
+ text-align:center;
+ margin-bottom:10px;
+ padding-top: 10px;
+ padding-bottom: 10px;
+}
+#subheader .level-select{
+ text-align:center;
+
+}
+#subheader .game-screen{
+ text-align:left;
+ padding-left: 25%;
+ padding-bottom: 20px;
+ padding-top: 20px;
+}
+#tables{
+  left: 5%;
+  position:relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
+table, th, td{
+  border: 1px solid #888888;
+}
+table{
+  float: left;
+  width: 25%;
+  margin: 20px;
+  border-collapse: collapse;
+
+}
+th{
+  text-align: center;
+  padding: 10px 20px 10px 20px;
+  background-color: #888888;
+  color: white;
+}
+td{
+  text-align: center;
+  padding: 10px 15px 10px 15px;
+
+
+}
+/* unvisited link */
+a:link {
+    color: #00c2a2;
+    text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+    color: #007461;
+    text-decoration: none;
+}
+
+/* mouse over link */
+a:hover {
+    color: #99E7DA;
+    text-decoration: none;
+}
+
+#game-info-left h2{
+    display: inline;
+
+}
+#game-info-left{
+  padding-bottom: 15px;
+
+}
+#game-info-left #round-word{
+  padding-right: 20%;
+}
+#game-info-left #round-number{
+  color: #AAAAAA;
+}
+#game-info-right{
+  float:right;
+}
+
+.column-left{ float: left; width: 16%; margin-right: 2%; margin-left: 2%}
+.column-right{ float: right; width: 16%; margin-right: 2%; margin-left: 2%}
+.column-center{ display: inline-block; width: 60%; }

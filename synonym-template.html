@@ -1,37 +1,10 @@
-<div id="header" >
-	<section class="level-select" ng-show="showLevelSelect">
-		<img src="Quill-Logo.png" alt="Quill">
-	</section>
-	<section class="game-screen" ng-show="showGame">
-		<img src="Quill-Logo.png" alt="Quill">
-		<p id="animal-name">{{animals[userid].name}} (You)</p>
-	</section>
-</div>
-<div id="subheader">
-	<section class="level-select" ng-show="showLevelSelect">
-		<h2 >Tool: WordLike</h2>
-		<p >This tool will help you learn synonyms.</p>
-	</section>
-	<section class="game-screen" ng-show="showGame">
-		<h2 style="padding-bottom: 10px;">{{myWord}}</h2>
-		<p >{{definition}}</p>
-	</section>
-</div>
 
-<section id="level-select" ng-show="showLevelSelect" >
 
-	<level></level>
-
-</section>
 <section id="game" ng-show="showGame">
 <div class="column-left">
 	<div class="bordered" style="padding-left:5px; padding-top:5px; padding-bottom:5px">Words Found <i class="fa fa-question-circle" ></i></div>
 	<div class="bordered" >
 		<ul><li ng-repeat="word in words"><spanresult a number ng-class="{'strike': word.strike}"><b>{{word.dummy}}</span>     <font color="green">{{word.points}}</font></b></li></ul>
-	</div>
-	<div class="bordered" style="background-color:#FFD633; margin-top:20px; padding-left:5px; padding-right:5px" >
-		<p>Click the button to show a word. You will have 45 seconds to try and guess as many synonyms of that word as you can. After every second without a guess, one of the words will have a part of it revealed.</p>
-		<p>Guessing a synonym correctly will result a number of points based on how much of the word has been revealed.</p>
 	</div>
 </div>
 

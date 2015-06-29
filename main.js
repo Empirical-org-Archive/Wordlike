@@ -6,7 +6,8 @@ app.run(function ($templateCache){
 	$templateCache.put('synonym-mini-game.html', '');
 });
 
-app.controller("AppCtrl", ['$scope', '$http','$sce', '$compile', '$interval', '$firebase','$sanitize' , '$firebaseObject', '$firebaseArray', function ($scope, $http, $sce, $compile, $interval, $firebase, $sanitize, $firebaseObject, $firebaseArray) {
+app.controller("AppCtrl", ['$scope', '$http','$sce', '$window', '$location', '$compile', '$interval', '$firebase','$sanitize' , '$firebaseObject', '$firebaseArray',
+function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebase, $sanitize, $firebaseObject, $firebaseArray) {
 
 	$scope.userid = Math.round(Math.random() * 586);
 	$scope.animals = [];
@@ -61,6 +62,7 @@ app.controller("AppCtrl", ['$scope', '$http','$sce', '$compile', '$interval', '$
 
 
 	//getLevelData(), gets the level from the level number specified
+	//retrieves the level data from the JSON level list
 	$scope.getLevelData = function(level){
 			//checks all the members of the json file to see which level's LevlNumber matches the one specified in the parameter
 			for(var i =0; i < levelList.length; i++){
@@ -111,6 +113,13 @@ app.controller("AppCtrl", ['$scope', '$http','$sce', '$compile', '$interval', '$
 		$scope.wordnumber = listIndex + 1;
 		timerStart();
 	};
+
+	$scope.selectLevel =function(level){
+		$location.path("/app.html/level" + level);
+		$scope.switchState();
+		console.log(level);
+	}
+
 	//used to compare word to user input
 	$scope.compare = function() {
 
@@ -379,6 +388,13 @@ app.directive('appdir', function ($templateCache) {
 	};
 });
 
+app.directive('headtemp', function ($templateCache) {
+
+	return {
+		restrict: 'E',
+		templateUrl: 'header-template.html'
+	};
+});
 
 
 app.filter('playerFilter', ['$http', function($http) {
