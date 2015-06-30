@@ -1,0 +1,15 @@
+{
+"data": [
+	{ "word":"perish", "definition":"suffer death, typically in a violent, sudden", "synonyms": [
+		{"syn":"die"}, {"syn":"decay"}, {"syn":"crumble"}, {"syn":"cease"}, {"syn":"wither"},
+		{"syn":"decline"}, {"syn":"succumb"}, {"syn":"decompose"}, {"syn":"decease"}, {"syn":"rot"}
+	]},
+	{ "word":"independent", "definition":"free from outside control; not depending on another's authority ", "synonyms": [
+		{"syn":"absolute"}, {"syn":"individualistic"}, {"syn":"free"}, {"syn":"uncontrolled"}, {"syn":"autonomous"},
+		{"syn":"unconstrained"}, {"syn":"separate"}, {"syn":"alone"}, {"syn":"unconnected"}
+	]},
+	{ "word":"mischief", "definition":"playfulness that is intended to tease, mock, or create trouble", "synonyms": [
+		{"syn":"trouble"}, {"syn":"prank"}, {"syn":"naughtiness"}, {"syn":"sneakiness"}, {"syn":"misbehavior"},
+		{"syn":"misbehavior"}, {"syn":"slyness"}, {"syn":"damage"}
+	]}
+]}

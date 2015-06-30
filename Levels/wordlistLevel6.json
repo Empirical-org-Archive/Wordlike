@@ -1,0 +1,15 @@
+{
+"data": [
+	{ "word":"saunter", "definition":"walk in a slow, relaxed manner, without hurry or effort.", "synonyms": [
+		{"syn":"stroll"}, {"syn":"ramble"}, {"syn":"promenade"}, {"syn":"mosey"}, {"syn":"tread"},
+		{"syn":"schlepp"}, {"syn":"stride"}, {"syn":"traipse"}, {"syn":"hike"}, {"syn":"step"}
+	]},
+	{ "word":"debate", "definition":"a formal discussion on a particular topic in a public meeting, in which opposing arguments are put forward.", "synonyms": [
+		{"syn":"argument"}, {"syn":"contest"}, {"syn":"controversy"}, {"syn":"dispute"}, {"syn":"match"},
+		{"syn":"disagreement"}, {"syn":"deliberation"}, {"syn":"refutation"}, {"syn":"tiff"}, {"syn":"altercation"}
+	]},
+	{ "word":"edible", "definition":"fit to be eaten.", "synonyms": [
+		{"syn":"tasty"}, {"syn":"digestible"}, {"syn":"nourishing"}, {"syn":"harmless"}, {"syn":"fit"},
+		{"syn":"savory"}, {"syn":"healthy"}, {"syn":"valuable"}, {"syn":"wholesome"}, {"syn":"healthful"}
+	]}
+]}

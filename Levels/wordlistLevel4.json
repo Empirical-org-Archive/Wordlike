@@ -1,0 +1,15 @@
+{
+"data": [
+	{ "word":"crave", "definition":"feel a powerful desire for (something).", "synonyms": [
+		{"syn":"covet"}, {"syn":"want"}, {"syn":"ache for"}, {"syn":"hunger"}, {"syn":"wish"},
+		{"syn":"long for"}, {"syn":"hanker for"}, {"syn":"aspire"}, {"syn":"greed"}, {"syn":"yearning"}
+	]},
+	{ "word":"route", "definition":"a way or course taken in getting from a starting point to a destination.", "synonyms": [
+		{"syn":"path"}, {"syn":"course"}, {"syn":"direction"}, {"syn":"passage"}, {"syn":"track"},
+		{"syn":"trail"}, {"syn":"road"}, {"syn":"plot"}, {"syn":"itinerary"}, {"syn":"journey"}
+	]},
+	{ "word":"hardworking", "definition":"(of a person) tending to work with energy and commitment.", "synonyms": [
+		{"syn":"dedicated"}, {"syn":"diligent"}, {"syn":"resolute"}, {"syn":"industrious"}, {"syn":"persistent"},
+		{"syn":"laborious"}, {"syn":"tireless"}, {"syn":"steadfast"}, {"syn":"incessant"}, {"syn":"enduring"}
+	]}
+]}

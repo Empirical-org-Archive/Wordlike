@@ -1,0 +1,15 @@
+{
+"data": [
+	{ "word":"soar", "definition":"rise high in the air.", "synonyms": [
+		{"syn":"fly"}, {"syn":"glide"}, {"syn":"rocket"}, {"syn":"sail"}, {"syn":"float"},
+		{"syn":"zoom"}, {"syn":"escalate"}, {"syn":"whiz"}, {"syn":"jet"}, {"syn":"shoot"}
+	]},
+	{ "word":"summit", "definition":"the highest point of a hill or mountain.", "synonyms": [
+		{"syn":"top"}, {"syn":"climax"}, {"syn":"peak"}, {"syn":"pinnacle"}, {"syn":"apex"},
+		{"syn":"culmination"}, {"syn":"roof"}, {"syn":"tip"}, {"syn":"cap"}, {"syn":"limit"}
+	]},
+	{ "word":"visible", "definition":"able to be seen.", "synonyms": [
+		{"syn":"obvious"}, {"syn":"clear"}, {"syn":"evident"}, {"syn":"in view"}, {"syn":"marked"},
+		{"syn":"revealed"}, {"syn":"plain"}, {"syn":"bold"}, {"syn":"noticebale"}, {"syn":"detectable"}
+	]}
+]}

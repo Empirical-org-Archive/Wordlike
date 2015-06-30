@@ -1,4 +1,4 @@
-var app = angular.module("synonymApp", ["firebase"]);
+var app = angular.module("synonymApp", ["firebase", "ngSanitize", ]);
 
 app.run(function ($templateCache){
 
@@ -6,11 +6,21 @@ app.run(function ($templateCache){
 	$templateCache.put('synonym-mini-game.html', '');
 });
 
-app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$firebaseObject', '$firebaseArray', function ($scope, $http, $interval, $firebase, $firebaseObject, $firebaseArray) {
+app.controller("AppCtrl", ['$scope', '$http','$sce', '$window', '$location', '$compile', '$interval', '$firebase','$sanitize' , '$firebaseObject', '$firebaseArray',
+function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebase, $sanitize, $firebaseObject, $firebaseArray) {
 
 	$scope.userid = Math.round(Math.random() * 586);
 	$scope.animals = [];
+	$scope.showLevelSelect = true;
+	$scope.showGame = false;
+	$scope.showNextLevelButton = false;
 	$http.get("animals.json").success(function(response) { $scope.animals = response.data; });
+
+	$scope.levelListHTML = "";//used to store the html used to make the level list
+	var leveList;//used for storing the list of levels from the JSON file
+
+
+	$scope.LevelGetPromise = $http.get('LevelList.json').success(function(response) {levelList = response.levels; $scope.levelListHTML = levelList.length});
 
 	var amOnline = new Firebase('https://synonymtest1.firebaseio.com/.info/connected');
 	var presenceRef = new Firebase('https://synonymtest1.firebaseio.com/presence/');
@@ -29,9 +39,10 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
     });
 
 	var inactionCounter = 0;
+	var totalTimePerWord = 45;
 
 	$scope.points = 0;
-	$scope.seconds = 0;
+	$scope.secondsCounter = 0;
 	$scope.showSubmit = true;
 	$scope.showCompare = false;
 
@@ -39,13 +50,37 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 	var active = false;
 
 	$scope.wordlist = [];
+	$scope.wordnumber = 0;
 	var listIndex = 0;
 	var synTracker = [];
 
-	$http.get("wordlist.json")
-	.success(function(response) {$scope.wordlist = response.data;});
+	$scope.currentLevelInfo = {};//used to store the all the info about the level retreived from the json file
 
+
+	$scope.showSubmit = true;
+	//gets the level list from JSON and stores it
+
+
+	//getLevelData(), gets the level from the level number specified
+	//retrieves the level data from the JSON level list
+	$scope.getLevelData = function(level){
+			//checks all the members of the json file to see which level's LevlNumber matches the one specified in the parameter
+			for(var i =0; i < levelList.length; i++){
+				if(levelList[i].levelNumber == level){
+					//sets the levelInfo to what is stored in the JSON file
+					$scope.currentLevelInfo = levelList[i];
+
+				}
+			}
+			console.log($scope.currentLevelInfo);
+			//gets the json file and sets it to the word list
+			$http.get($scope.currentLevelInfo.levelFile).success(function(response) {$scope.wordlist = response.data;});
+
+	}
+	//used to parse the json file and place all objects into the word[] array
 	$scope.fetchData = function() {
+
+		setInputState(false);
 
 		$scope.showSubmit = false;
 
@@ -55,20 +90,37 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 
 			var blanks = "";
 			for (var j = 0; j <= $scope.wordlist[listIndex].synonyms[i].syn.length - 1; j++) {
-				blanks += "-"
+
+				if(j==0)
+				{
+					blanks += $scope.wordlist[listIndex].synonyms[i].syn.substring(0,1)
+				}
+				else
+				{
+					blanks += "-"
+				}
+
 			};
-			
+
 			synTracker[i] = i;
-			$scope.words[i] = {word: $scope.wordlist[listIndex].synonyms[i].syn, dummy:blanks, toSwap:0, strike:false, points:""};
+			$scope.words[i] = {word: $scope.wordlist[listIndex].synonyms[i].syn, dummy:blanks, toSwap:1, strike:false, points:""};
 		}
 
 		$scope.showCompare = true;
 		$scope.myWord = $scope.wordlist[listIndex].word;
 		$scope.definition = $scope.wordlist[listIndex].definition;
 		$scope.status = "";
+		$scope.wordnumber = listIndex + 1;
 		timerStart();
 	};
 
+	$scope.selectLevel =function(level){
+		$location.path("/app.html/level" + level);
+		$scope.switchState();
+		console.log(level);
+	}
+
+	//used to compare word to user input
 	$scope.compare = function() {
 
 		inactionCounter = 0;
@@ -102,8 +154,66 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 		$scope.status = "That word didn't work. Try again.";
 		$scope.input = "";
 	};
+	//switches states between the level select screen and the game itself
+	$scope.switchState = function(){
+		if($scope.showLevelSelect == true){
+			$scope.resetLevel();
+			$scope.showGame = true;
+			$scope.showLevelSelect = false;
+			listIndex = 0;
+			synTracker = [];
+		}
+		else{
+			$scope.resetLevel()
+			$scope.showGame = false;
+			$scope.showLevelSelect = true;		}
+
+
+	}
+	//this resets the level by reseting most of the game values
+	$scope.resetLevel = function(){
+		timerStop();
+		$scope.showSubmit = true;
+		$scope.showNextLevelButton = false;
+		$scope.wordnumber = 0;
+		$scope.secondsCounter = totalTimePerWord;
+		$scope.wordlist = [];
+		$scope.words = [];
+		$scope.status = '';
+		$scope.myWord = '';
+		$scope.definition = '';
+		listIndex = 0;
+		synTracker = [];
+	}
+	//this changes the level once the player has beaten the level
+	//this is called template with the Next Level Button
+	$scope.changeLevel = function(){
+
+		$scope.resetLevel();
+		$scope.getLevelData($scope.currentLevelInfo.levelNumber + 1);
+		$scope.status = "Next Level";
+
+
+	}
+
 
 		//Helper functions
+	//checks to see if there is a next level
+	//returns true when there is a next level, returns false when there is not
+	var checkIfNextLevel = function(levelL){
+		//gets the last level in the array of levels, and checks if that
+		//level is not equal to the current level.  If they are not equal,
+		//there is a next level
+		var levelAmount = levelL.length - 1;
+		if(levelL[levelAmount].levelNumber != $scope.currentLevelInfo.levelNumber)
+		{
+			return true;
+		}
+		else
+		{
+			return false
+		}
+	}
 
 	//Custom string character replace function
 	var replaceAt = function(str, index, chr) {
@@ -130,7 +240,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 		var item = $scope.words[synTracker[wordIndex]];
 		item.dummy = replaceAt(item.dummy, item.toSwap, item.word.charAt(item.toSwap));
 		item.toSwap++;
-		console.log(item.toSwap);
+		//console.log(item.toSwap);
 
 		if(item.toSwap == item.word.length - 1) {
 
@@ -145,15 +255,23 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 		inactionCounter = 0;
 
 		for (var i = $scope.words.length - 1; i >= 0; i--) {
-			
+
 			$scope.words[i].dummy = $scope.words[i].word;
 			$scope.words[i].toSwap = $scope.words[i].word.length - 1;
 		}
 
 		if(listIndex == $scope.wordlist.length) {
 
-			$scope.myWord = "Game Over"
-			$scope.definition = "No more words remain. Thanks for playing!"
+			if(checkIfNextLevel(levelList) == true)
+			{
+				console.log("there is a next level");
+				$scope.showNextLevelButton = true;
+
+			}
+			else {
+
+			}
+
 			return;
 		}
 
@@ -162,7 +280,7 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 
 	var timerStart = function() {
 
-		$scope.seconds = 45;
+		$scope.secondsCounter = totalTimePerWord;
 		active = true;
 
 		if (intervalPromise == null) {intervalPromise = $interval(timerTick, 1000);}
@@ -178,23 +296,29 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 	var timerTick = function() {
 
 		if(active) {
-			$scope.seconds--;
+			$scope.secondsCounter--;
 			inactionCounter++;
 
-			if($scope.seconds === 0) {
+			if($scope.secondsCounter === 0) {
 	        	timerStop();
 	        	outOfTime();
+						setInputState(true);
 			}
 			else if(inactionCounter == 1) {
 				inactionTrigger();
 			}
 		}
 	}
+	//sets the input to disabled (greys it out)
+	var setInputState = function(state){
+
+			$("#main-input").prop('disabled', state)
+
+
+	}
+
+
 	intervalPromise = $interval(timerTick, 1000);
-
-
-
-
 
 
 	//Connetivity and Multiplayer stuff
@@ -206,6 +330,55 @@ app.controller("AppCtrl", ['$scope', '$http', '$interval', '$firebase', '$fireba
 	});
 }]);
 
+//this is used to create all of the buttons for all of the levels in the level select
+app.directive("level", function($compile, $http){
+	return function($scope, element, attrs){
+			var NumofLevels;
+			$scope.LevelGetPromise.success(function(response){
+			NumofLevels = response.levels.length;
+			for(var i = 0; i < NumofLevels; i++){
+				//easy levels
+				if(i == 0){
+					element.append($compile("<table><tr><th>Easy</th></tr>")($scope));
+					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
+				}
+				if(i > 0 && i < 3){
+					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
+				}
+				if(i == 3){
+					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
+					element.append($compile("</table>")($scope));
+				}
+				//medium levels
+				if(i == 4){
+					element.append($compile("<table><tr><th>Medium</th></tr>")($scope));
+					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
+				}
+				if(i > 4 && i < 6){
+					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
+				}
+				if(i == 6){
+					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
+					element.append($compile("</table>")($scope));
+				}
+				//hard levels
+				if(i == 7){
+					element.append($compile("<table><tr><th>Hard</th></tr>")($scope));
+					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
+				}
+				if(i > 7 && i < 10){
+					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
+				}
+				if(i == 10){
+					element.append($compile("</table>")($scope));
+				}
+			}
+		});
+
+	};
+
+});
+
 app.directive('appdir', function ($templateCache) {
 
 	return {
@@ -215,10 +388,19 @@ app.directive('appdir', function ($templateCache) {
 	};
 });
 
+app.directive('headtemp', function ($templateCache) {
+
+	return {
+		restrict: 'E',
+		templateUrl: 'header-template.html'
+	};
+});
+
+
 app.filter('playerFilter', ['$http', function($http) {
 	return function(input, userid, scope) {
 
-		if (scope.animals[input]) { 
+		if (scope.animals[input]) {
 			var out = scope.animals[input].name;
 
 			if(input == userid) {

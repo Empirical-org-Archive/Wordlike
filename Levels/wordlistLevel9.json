@@ -1,0 +1,15 @@
+{
+"data": [
+	{ "word":"exhibit", "definition":"publicly display (a work of art or item of interest) in an art gallery or museum or at a trade fair.", "synonyms": [
+		{"syn":"fair"}, {"syn":"model"}, {"syn":"performance"}, {"syn":"show"}, {"syn":"act"},
+		{"syn":"appear"}, {"syn":"represent"}, {"syn":"introduce"}, {"syn":"expose"}, {"syn":"demonstrate"}
+	]},
+	{ "word":"protagonist", "definition":"the leading character or one of the major characters in a drama, movie, novel, or other fictional text.", "synonyms": [
+		{"syn":"hero"}, {"syn":"idol"}, {"syn":"champion"}, {"syn":"lead"}, {"syn":"principal"},
+		{"syn":"star"}, {"syn":"heroine"}, {"syn":"head"}, {"syn":"advocate"}, {"syn":"combatant"}
+	]},
+	{ "word":"identical", "definition":"similar in every detail; exactly alike.", "synonyms": [
+		{"syn":"exact"}, {"syn":"interchangeable"}, {"syn":"indistiguishable"}, {"syn":"copy"}, {"syn":"same"},
+		{"syn":"matching"}, {"syn":"double"}, {"syn":"twin"}, {"syn":"equivalent"}, {"syn":"alike"}
+	]}
+]}

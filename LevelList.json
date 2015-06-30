@@ -1,0 +1,14 @@
+{
+"levels": [
+	{ "levelName":"Level 1", "altName":"L1", "levelNumber":1, "levelFile":"Levels/wordlistLevel1.json"  },
+	{ "levelName":"Level 2", "altName":"L2", "levelNumber":2, "levelFile":"Levels/wordlistLevel2.json"  },
+	{ "levelName":"Level 3", "altName":"L3", "levelNumber":3, "levelFile":"Levels/wordlistLevel3.json"  },
+	{ "levelName":"Level 4", "altName":"L4", "levelNumber":4, "levelFile":"Levels/wordlistLevel4.json"  },
+	{ "levelName":"Level 5", "altName":"L5", "levelNumber":5, "levelFile":"Levels/wordlistLevel5.json"  },
+	{ "levelName":"Level 6", "altName":"L6", "levelNumber":6, "levelFile":"Levels/wordlistLevel6.json"  },
+	{ "levelName":"Level 7", "altName":"L7", "levelNumber":7, "levelFile":"Levels/wordlistLevel7.json"  },
+	{ "levelName":"Level 8", "altName":"L8", "levelNumber":8, "levelFile":"Levels/wordlistLevel8.json"  },
+	{ "levelName":"Level 9", "altName":"L9", "levelNumber":9, "levelFile":"Levels/wordlistLevel9.json"  },
+	{ "levelName":"Level 10", "altName":"L10", "levelNumber":10, "levelFile":"Levels/wordlistLevel10.json"  }
+
+]}
