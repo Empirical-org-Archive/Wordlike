@@ -4,7 +4,7 @@
 	</section>
 	<section class="game-screen" ng-show="showGame">
 		<img src="Quill-Logo.png" alt="Quill">
-		<p id="animal-name">{{animals[userid].name}} (You)</p>
+		<p id="username">{{animals[userid].name}} (You)</p>
 	</section>
 </div>
 <div id="subheader">
@@ -13,14 +13,13 @@
 		<p >This tool will help you learn synonyms.</p>
 	</section>
 	<section class="game-screen" ng-show="showGame">
+		<div id="game-info-right">
+      <p id="timer">0:{{secondsCounter}}</p>
+    </div>
     <div id="game-info-left">
 		  <h2 id="round-word">{{myWord}}</h2>
       <h2 id="round-number">Round {{currentLevelInfo.levelNumber}}</h2>
+			<p>{{definition}}</p>
 		</div>
-    <div id="game-info-right">
-      {{secondsCounter}}
-    </div>
-    <p>{{definition}}</p>
-
   </section>
 </div>

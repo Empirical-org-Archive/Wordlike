@@ -47,7 +47,7 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 	$scope.showCompare = false;
 
 	var intervalPromise = null;
-	var active = false;
+	$scope.active = false;
 
 	$scope.wordlist = [];
 	$scope.wordnumber = 0;
@@ -281,7 +281,7 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 	var timerStart = function() {
 
 		$scope.secondsCounter = totalTimePerWord;
-		active = true;
+		$scope.active = true;
 
 		if (intervalPromise == null) {intervalPromise = $interval(timerTick, 1000);}
 	}
@@ -290,12 +290,12 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 
 		$interval.cancel(intervalPromise);
 		intervalPromise = null;
-		active = false;
+		$scope.active = false;
 	}
 
 	var timerTick = function() {
 
-		if(active) {
+		if($scope.active) {
 			$scope.secondsCounter--;
 			inactionCounter++;
 

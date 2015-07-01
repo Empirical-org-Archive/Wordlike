@@ -9,7 +9,6 @@
 </div>
 
 <div class="column-center">
-	<span >{{secondsCounter}} seconds left <i class="fa fa-question-circle" ></i></span>
 	<h3>{{currentLevelInfo.levelName}} , Word {{wordnumber}} </h3>
 
 
@@ -19,26 +18,30 @@
 
 	<div ng-show="showCompare">
 		<form ng-submit="compare()">
-			<i class="fa fa-question-circle" ></i>
+			
 			<input id="main-input" type="text" ng-model="input">
 			<button>Compare to the list</button>
 		</form>
 		<h1>{{status}}</h1>
 	</div>
+
 	<div id="backbutton-div">
 		<button ng-click="switchState()">Back to Level Select</button>
 	</div>
+
 	<div ng-show="showNextLevelButton">
 		<button ng-click="changeLevel()">Next Level</button>
 	</div>
+
 </div>
 
 <div class="column-right">
 	<div class="bordered" style="padding-left:5px; padding-top:10px; padding-bottom:10px" >
-	</br>{{points}} Points <i class="fa fa-question-circle" ></i></div>
+	</br>{{points}} Points </div>
 	<div class="bordered" style="padding-left:5px; padding-top:5px; padding-bottom:5px; margin-top:20px">Leaderboard <i class="fa fa-question-circle" ></i></div>
 	<div style="border-style:solid; border-width:1px; border-color:gray" >
 		<p style="padding-left:5px" ng-repeat="player in players">{{player.userid | playerFilter:userid:this}} -- {{player.points}} Points</p>
 	</div>
+
 </div>
 </section>
