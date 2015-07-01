@@ -36,10 +36,7 @@ p{
   padding-top: 30px;
   float:right;
 }
-#timer{
-  float: left;
-  padding-bottom: 20px;
-}
+
 #subheader{
  background-color:#DDDDDD;
  text-align:center;
@@ -76,6 +73,7 @@ table{
 
 }
 th{
+  font-size: 22px;
   text-align: center;
   padding: 10px 20px 10px 20px;
   background-color: #888888;
@@ -118,6 +116,11 @@ a:hover {
 }
 #game-info-left #round-number{
   color: #AAAAAA;
+}
+#game-info-right #timer{
+  color: #AAAAAA;
+  font-size: 20px;
+  font-weight: bold;
 }
 #game-info-right{
   float:right;

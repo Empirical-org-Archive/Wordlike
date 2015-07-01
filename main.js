@@ -45,6 +45,8 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 	$scope.secondsCounter = 0;
 	$scope.showSubmit = true;
 	$scope.showCompare = false;
+	$scope.rowLength = 4;
+	$scope.rowTracker = [];
 
 	var intervalPromise = null;
 	$scope.active = false;
@@ -86,6 +88,7 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 
 		$scope.words = [];
 
+
 		for (var i = 0; i <= $scope.wordlist[listIndex].synonyms.length - 1; i++) {
 
 			var blanks = "";
@@ -106,6 +109,12 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 			$scope.words[i] = {word: $scope.wordlist[listIndex].synonyms[i].syn, dummy:blanks, toSwap:1, strike:false, points:""};
 		}
 
+
+		for (var i = 0; i < $scope.words.length; i++ ) {
+        if (i % $scope.rowLength == 0) $scope.rowTracker.push([]);
+        $scope.rowTracker[$scope.rowTracker.length-1].push($scope.words[i]);
+    }
+		console.log($scope.rowTracker);
 		$scope.showCompare = true;
 		$scope.myWord = $scope.wordlist[listIndex].word;
 		$scope.definition = $scope.wordlist[listIndex].definition;

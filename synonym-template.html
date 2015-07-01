@@ -1,11 +1,16 @@
 
 
 <section id="game" ng-show="showGame">
-<div class="column-left">
+<div class="word-list">
 	<div class="bordered" style="padding-left:5px; padding-top:5px; padding-bottom:5px">Words Found <i class="fa fa-question-circle" ></i></div>
-	<div class="bordered" >
 		<ul><li ng-repeat="word in words"><spanresult a number ng-class="{'strike': word.strike}"><b>{{word.dummy}}</span>     <font color="green">{{word.points}}</font></b></li></ul>
-	</div>
+			<table>
+				<tr ng-repeat="word in rowTracker">
+					<td ng-repeat="row in rowTracker">
+						<p ng-hide="word.strike">{{word.dummy}}</p><strike ng-show="word.strike">{{word.dummy}}</strike><font color="green">  {{word.points}}</font>
+					</td>
+				</tr>
+			</table>
 </div>
 
 <div class="column-center">
@@ -18,7 +23,7 @@
 
 	<div ng-show="showCompare">
 		<form ng-submit="compare()">
-			
+
 			<input id="main-input" type="text" ng-model="input">
 			<button>Compare to the list</button>
 		</form>
