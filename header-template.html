@@ -14,11 +14,13 @@
 	</section>
 	<section class="game-screen" ng-show="showGame">
 		<div id="game-info-right">
-      <p id="timer">0:{{secondsCounter}}</p>
+      <p id="timer">{{formatTime()}}</p>
+			<p id="points">{{points}} Points </p>
+
     </div>
     <div id="game-info-left">
 		  <h2 id="round-word">{{myWord}}</h2>
-      <h2 id="round-number">{{currentLevelInfo.levelName}}, Round {{wordnumber}}</h2>
+      <h2 id="round-number">Round {{wordnumber}}</h2>
 			<p>{{definition}}</p>
 		</div>
   </section>

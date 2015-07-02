@@ -62,24 +62,24 @@ p{
   margin-right: auto;
   width: 75%;
 }
-table, th, td{
+#tables table, th, td{
   border: 1px solid #888888;
 }
-table{
+#tables table{
   float: left;
   width: 25%;
   margin: 20px;
   border-collapse: collapse;
 
 }
-th{
+#tables th{
   font-size: 22px;
   text-align: center;
   padding: 10px 20px 10px 20px;
   background-color: #888888;
   color: white;
 }
-td{
+#tables td{
   text-align: center;
   padding: 10px 15px 10px 15px;
 
@@ -122,10 +122,73 @@ a:hover {
   font-size: 20px;
   font-weight: bold;
 }
+#game-info-right #points{
+  color: #AAAAAA;
+  font-size: 20px;
+  font-weight: bold;
+}
 #game-info-right{
   float:right;
 }
+#game .word-list{
 
-.column-left{ float: left; width: 16%; margin-right: 2%; margin-left: 2%}
-.column-right{ float: right; width: 16%; margin-right: 2%; margin-left: 2%}
-.column-center{ display: inline-block; width: 60%; }
+}
+#game .word-list table{
+  width: 70%;
+  margin-right: auto;
+  margin-left: auto;
+  border-color: #888888;
+}
+#game .word-list td{
+  width: 14%;
+  height: 40px;
+}
+
+#game .word-list p{
+  font-size: 30px;
+  text-align: left;
+  padding-left: 5px;
+}
+#game .form-div{
+  width: 50%;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+}
+#game .form-div #check-button{
+  display: block;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+#game .form-div #main-input{
+  margin-top: 25px;
+  font-size: 20px;
+  font-family: 'Open Sans', sans-serif;;
+  text-align: center;
+  height: 30px;
+
+}
+#game .form-div form{
+  display: block;
+}
+
+button {
+  border-radius: 8px;
+  font-family: 'Open Sans', sans-serif;;
+  color: white;
+  font-size: 20px;
+  background: #00C2A2;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  border: none;
+}
+
+button:hover {
+  background: #99E7DA;
+  text-decoration: none;
+}
+
+
+.column-right{  width: 16%; margin-right: 2%; margin-left: 2%}

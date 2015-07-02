@@ -1,6 +1,6 @@
 {
-  "firebase": "synonymtest1",
-  "public": ".",
+  "firebase": "wordlike",
+  "public": "./",
   "ignore": [
     "firebase.json",
     "**/.*"

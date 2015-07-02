@@ -1,31 +1,39 @@
-
-
 <section id="game" ng-show="showGame">
 <div class="word-list">
-	<div class="bordered" style="padding-left:5px; padding-top:5px; padding-bottom:5px">Words Found <i class="fa fa-question-circle" ></i></div>
-		<ul><li ng-repeat="word in words"><spanresult a number ng-class="{'strike': word.strike}"><b>{{word.dummy}}</span>     <font color="green">{{word.points}}</font></b></li></ul>
-			<table>
-				<tr ng-repeat="word in rowTracker">
-					<td ng-repeat="row in rowTracker">
-						<p ng-hide="word.strike">{{word.dummy}}</p><strike ng-show="word.strike">{{word.dummy}}</strike><font color="green">  {{word.points}}</font>
-					</td>
-				</tr>
-			</table>
+		<table>
+			<tr>
+				<td><p ng-hide="words[0].strike">{{words[0].dummy}}</p><p><strike ng-show="words[0].strike">{{words[0].dummy}}</strike></p></td>
+				<td><p ng-hide="words[1].strike">{{words[1].dummy}}</p><p><strike ng-show="words[1].strike">{{words[1].dummy}}</strike></p></td>
+				<td><p ng-hide="words[2].strike">{{words[2].dummy}}</p><p><strike ng-show="words[2].strike">{{words[2].dummy}}</strike></p></td>
+				<td><p ng-hide="words[3].strike">{{words[3].dummy}}</p><p><strike ng-show="words[3].strike">{{words[3].dummy}}</strike></p></td>
+			</tr>
+			<tr>
+				<td><p ng-hide="words[4].strike">{{words[4].dummy}}</p><p><strike ng-show="words[4].strike">{{words[4].dummy}}</strike></p></td>
+				<td><p ng-hide="words[5].strike">{{words[5].dummy}}</p><p><strike ng-show="words[5].strike">{{words[5].dummy}}</strike></p></td>
+				<td><p ng-hide="words[6].strike">{{words[6].dummy}}</p><p><strike ng-show="words[6].strike">{{words[6].dummy}}</strike></p></td>
+				<td><p ng-hide="words[7].strike">{{words[7].dummy}}</p><p><strike ng-show="words[7].strike">{{words[7].dummy}}</strike></p></td>
+			</tr>
+			<tr>
+				<td><p ng-hide="words[8].strike">{{words[8].dummy}}</p><p><strike ng-show="words[8].strike">{{words[8].dummy}}</strike></p></td>
+				<td><p ng-hide="words[9].strike">{{words[9].dummy}}</p><p><strike ng-show="words[9].strike">{{words[9].dummy}}</strike></p></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
 </div>
 
-<div class="column-center">
-	<h3>{{currentLevelInfo.levelName}} , Word {{wordnumber}} </h3>
-
-
-	<div ng-show="showSubmit">
-		<button ng-click="fetchData()" >Next word</button>
-	</div>
-
-	<div ng-show="showCompare">
+	<div class="form-div" >
+		<h1 style="background-color:green;">{{lastPointIncrease}}</h1>
 		<form ng-submit="compare()">
 
-			<input id="main-input" type="text" ng-model="input">
-			<button>Compare to the list</button>
+			<input placeholder="Enter a Synonym" id="main-input" type="text" ng-model="input">
+			<button id="check-button" >Check Word</button>
+			<p>or press enter...</p>
+
+			<div id="next-button" ng-show="showSubmit">
+				<button ng-click="fetchData()" >Next word</button>
+			</div>
+
 		</form>
 		<h1>{{status}}</h1>
 	</div>
@@ -38,14 +46,14 @@
 		<button ng-click="changeLevel()">Next Level</button>
 	</div>
 
-</div>
+
 
 <div class="column-right">
 	<div class="bordered" style="padding-left:5px; padding-top:10px; padding-bottom:10px" >
 	</br>{{points}} Points </div>
 	<div class="bordered" style="padding-left:5px; padding-top:5px; padding-bottom:5px; margin-top:20px">Leaderboard <i class="fa fa-question-circle" ></i></div>
 	<div style="border-style:solid; border-width:1px; border-color:gray" >
-		<p style="padding-left:5px" ng-repeat="player in players">{{player.userid | playerFilter:userid:this}} -- {{player.points}} Points</p>
+		<p style="padding-left:5px" ng-repeat="player in sortedPlayerList">{{player.userid | playerFilter:userid:this}} -- {{player.points}} Points</p>
 	</div>
 
 </div>

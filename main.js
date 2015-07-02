@@ -29,6 +29,7 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 	var roomRef = new Firebase('https://synonymtest1.firebaseio.com/roomInfo')
 
 	$scope.players = $firebaseArray(presenceRef);
+	$scope.sortedPlayerList = [];
 
 	$scope.players.$loaded().then(function() {
         userRef.set({points: 0, userid:$scope.userid});
@@ -39,14 +40,13 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
     });
 
 	var inactionCounter = 0;
-	var totalTimePerWord = 45;
+	var totalTimePerWord = 75;
 
 	$scope.points = 0;
 	$scope.secondsCounter = 0;
 	$scope.showSubmit = true;
 	$scope.showCompare = false;
-	$scope.rowLength = 4;
-	$scope.rowTracker = [];
+	$scope.lastPointIncrease = 0;
 
 	var intervalPromise = null;
 	$scope.active = false;
@@ -110,11 +110,6 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 		}
 
 
-		for (var i = 0; i < $scope.words.length; i++ ) {
-        if (i % $scope.rowLength == 0) $scope.rowTracker.push([]);
-        $scope.rowTracker[$scope.rowTracker.length-1].push($scope.words[i]);
-    }
-		console.log($scope.rowTracker);
 		$scope.showCompare = true;
 		$scope.myWord = $scope.wordlist[listIndex].word;
 		$scope.definition = $scope.wordlist[listIndex].definition;
@@ -146,8 +141,9 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 					$scope.words[i].strike = true;
 					$scope.points += $scope.words[i].word.length - $scope.words[i].toSwap;
 					$scope.words[i].points = "+ " + ($scope.words[i].word.length - $scope.words[i].toSwap);
-
+					$scope.lastPointIncrease = $scope.words[i].points;
 					userRef.update({points: $scope.points});
+
 
 					trackerRemove(i);
 					return;
@@ -191,6 +187,7 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 		$scope.status = '';
 		$scope.myWord = '';
 		$scope.definition = '';
+		$scope.lastPointIncrease = 0;
 		listIndex = 0;
 		synTracker = [];
 	}
@@ -202,6 +199,18 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 		$scope.getLevelData($scope.currentLevelInfo.levelNumber + 1);
 		$scope.status = "Next Level";
 
+
+	}
+	$scope.formatTime = function(){
+		var time = "";
+		var minutes = Math.floor($scope.secondsCounter / 60)
+		var seconds = $scope.secondsCounter % 60;
+		if (seconds < 10){
+			seconds = "0"+ seconds;
+		}
+
+		time = minutes + ":" + seconds;
+		return time;
 
 	}
 
@@ -222,6 +231,31 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 		{
 			return false
 		}
+	}
+
+	//gets the player list and sorts them by the amount of points they have
+	var sortPlayers = function(){
+		$scope.sortedPlayerList = [];
+		var scores = [];
+		var playerTemp = $scope.players;
+		console.log(playerTemp);
+		for(var i = 0; i < $scope.players.length; i++){
+			scores.push($scope.players[i].points);
+
+		}
+
+		var HighestScore = Math.max.apply(null, scores);
+
+		for(var i = HighestScore; i >= 0; i--){
+			for(var j = 0; j < playerTemp.length; j++){
+				if($scope.players[j].points == i)
+				{
+					$scope.sortedPlayerList.push(playerTemp[j]);
+
+				}
+			}
+		}
+
 	}
 
 	//Custom string character replace function
@@ -307,7 +341,7 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 		if($scope.active) {
 			$scope.secondsCounter--;
 			inactionCounter++;
-
+			sortPlayers();
 			if($scope.secondsCounter === 0) {
 	        	timerStop();
 	        	outOfTime();
