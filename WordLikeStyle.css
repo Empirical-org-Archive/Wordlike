@@ -130,9 +130,7 @@ a:hover {
 #game-info-right{
   float:right;
 }
-#game .word-list{
 
-}
 #game .word-list table{
   width: 70%;
   margin-right: auto;
@@ -173,6 +171,38 @@ a:hover {
 #game .form-div form{
   display: block;
 }
+#game #backbutton-div{
+  padding-top: 20px;
+  padding-left: 45px;
+}
+#score {
+  width: 70%;
+  margin-right: auto;
+  margin-left: auto;
+
+}
+#score table {
+  width: 40%;
+  margin-right: auto;
+  margin-left: auto;
+
+}
+#score table td {
+  margin-top: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 25px;
+  font-family: 'Open Sans', sans-serif;;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  height: 30px;
+}
+
+#score table td #player-place {float: left; padding-right: 35%;}
+
+#score table td #player-points {float: right;}
+
 
 button {
   border-radius: 8px;
@@ -189,6 +219,3 @@ button:hover {
   background: #99E7DA;
   text-decoration: none;
 }
-
-
-.column-right{  width: 16%; margin-right: 2%; margin-left: 2%}

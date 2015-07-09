@@ -22,39 +22,28 @@
 		</table>
 </div>
 
-	<div class="form-div" >
-		<h1 style="background-color:green;">{{lastPointIncrease}}</h1>
-		<form ng-submit="compare()">
-
-			<input placeholder="Enter a Synonym" id="main-input" type="text" ng-model="input">
-			<button id="check-button" >Check Word</button>
-			<p>or press enter...</p>
-
-			<div id="next-button" ng-show="showSubmit">
-				<button ng-click="fetchData()" >Next word</button>
-			</div>
-
-		</form>
+<div class="form-div" >
+	<h1 style="background-color:green;">{{lastPointIncrease}}</h1>
+	<form ng-submit="compare()">
 		<h1>{{status}}</h1>
+		<input placeholder="Enter a Synonym" id="main-input" type="text" ng-model="input">
+		<button id="check-button" >Check Word</button>
+		<p>or press enter...</p>
+
+		<div id="next-button" ng-show="showStartButton">
+			<button ng-click="fetchData()">Start</button>
+		</div>
+		<div id="score-button" ng-show="showScoreButton">
+			<button ng-click="switchState(3)">Show Scores</button>
+		</div>
+
+
+	</form>
+
 	</div>
 
 	<div id="backbutton-div">
-		<button ng-click="switchState()">Back to Level Select</button>
+		<button ng-click="switchState(1); resetLevel();">Back to Level Select</button>
 	</div>
 
-	<div ng-show="showNextLevelButton">
-		<button ng-click="changeLevel()">Next Level</button>
-	</div>
-
-
-
-<div class="column-right">
-	<div class="bordered" style="padding-left:5px; padding-top:10px; padding-bottom:10px" >
-	</br>{{points}} Points </div>
-	<div class="bordered" style="padding-left:5px; padding-top:5px; padding-bottom:5px; margin-top:20px">Leaderboard <i class="fa fa-question-circle" ></i></div>
-	<div style="border-style:solid; border-width:1px; border-color:gray" >
-		<p style="padding-left:5px" ng-repeat="player in sortedPlayerList">{{player.userid | playerFilter:userid:this}} -- {{player.points}} Points</p>
-	</div>
-
-</div>
 </section>

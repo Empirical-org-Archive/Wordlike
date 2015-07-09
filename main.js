@@ -13,7 +13,10 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 	$scope.animals = [];
 	$scope.showLevelSelect = true;
 	$scope.showGame = false;
+	$scope.showScore = false;
 	$scope.showNextLevelButton = false;
+	$scope.showStartButton = true;
+	$scope.showScoreButton = false;
 	$http.get("animals.json").success(function(response) { $scope.animals = response.data; });
 
 	$scope.levelListHTML = "";//used to store the html used to make the level list
@@ -40,7 +43,7 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
     });
 
 	var inactionCounter = 0;
-	var totalTimePerWord = 75;
+	var totalTimePerWord = 10;
 
 	$scope.points = 0;
 	$scope.secondsCounter = 0;
@@ -88,7 +91,6 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 
 		$scope.words = [];
 
-
 		for (var i = 0; i <= $scope.wordlist[listIndex].synonyms.length - 1; i++) {
 
 			var blanks = "";
@@ -111,6 +113,7 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 
 
 		$scope.showCompare = true;
+		$scope.showStartButton = false;
 		$scope.myWord = $scope.wordlist[listIndex].word;
 		$scope.definition = $scope.wordlist[listIndex].definition;
 		$scope.status = "";
@@ -160,18 +163,27 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 		$scope.input = "";
 	};
 	//switches states between the level select screen and the game itself
-	$scope.switchState = function(){
-		if($scope.showLevelSelect == true){
-			$scope.resetLevel();
-			$scope.showGame = true;
-			$scope.showLevelSelect = false;
-			listIndex = 0;
-			synTracker = [];
-		}
-		else{
-			$scope.resetLevel()
+	$scope.switchState = function(state){
+		if(state == 1)
+		{
 			$scope.showGame = false;
-			$scope.showLevelSelect = true;		}
+			$scope.showScore = false;
+			$scope.showLevelSelect = true;
+		}
+		if(state == 2)
+		{
+			$scope.showGame = true;
+			$scope.showScore = false;
+			$scope.showLevelSelect = false;
+
+		}
+		if(state == 3)
+		{
+			$scope.showGame = false;
+			$scope.showScore = true;
+			$scope.showLevelSelect = false;
+
+		}
 
 
 	}
@@ -194,13 +206,13 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 	//this changes the level once the player has beaten the level
 	//this is called template with the Next Level Button
 	$scope.changeLevel = function(){
-
 		$scope.resetLevel();
 		$scope.getLevelData($scope.currentLevelInfo.levelNumber + 1);
 		$scope.status = "Next Level";
 
 
 	}
+
 	$scope.formatTime = function(){
 		var time = "";
 		var minutes = Math.floor($scope.secondsCounter / 60)
@@ -250,6 +262,7 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 			for(var j = 0; j < playerTemp.length; j++){
 				if($scope.players[j].points == i)
 				{
+					playerTemp[j].placeNumber = j+1;
 					$scope.sortedPlayerList.push(playerTemp[j]);
 
 				}
@@ -293,6 +306,7 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 
 	var outOfTime = function() {
 
+		$scope.showScoreButton = true;
 		$scope.status = "Out of time. Revealing answers.";
 		listIndex++;
 		inactionCounter = 0;
@@ -345,7 +359,6 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 			if($scope.secondsCounter === 0) {
 	        	timerStop();
 	        	outOfTime();
-						setInputState(true);
 			}
 			else if(inactionCounter == 1) {
 				inactionTrigger();
@@ -436,6 +449,14 @@ app.directive('headtemp', function ($templateCache) {
 	return {
 		restrict: 'E',
 		templateUrl: 'header-template.html'
+	};
+});
+
+app.directive('scoretemp', function ($templateCache) {
+
+	return {
+		restrict: 'E',
+		templateUrl: 'score-template.html'
 	};
 });
 

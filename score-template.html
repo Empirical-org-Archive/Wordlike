@@ -1,0 +1,19 @@
+<section id="score" ng-show="showScore">
+  <h1>Highscores</h1>
+
+  <table id="score-table" ng-init="rowCreate = [1]">
+      <tr ng-repeat="player in sortedPlayerList" >
+        <td ng-repeat="r in rowCreate">
+          <span id="player-place">{{$parent.$index + 1}}</span>
+          <span id="player-id">{{player.userid | playerFilter:userid:this}}</span>
+          <span id="player-points">+ {{player.points}}</span>
+        </td>
+      </tr>
+  </table>
+  <div id="next-button" >
+    <button ng-click="fetchData(); switchState(2); showScoreButton=false;">Next Word</button>
+  </div>
+  <div ng-show="showNextLevelButton">
+		<button ng-click="changeLevel(); ">Next Level</button>
+	</div>
+</section>

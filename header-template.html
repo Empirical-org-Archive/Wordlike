@@ -6,6 +6,10 @@
 		<img src="Quill-Logo.png" alt="Quill">
 		<p id="username">{{animals[userid].name}} (You)</p>
 	</section>
+	<section class="game-screen" ng-show="showScore">
+		<img src="Quill-Logo.png" alt="Quill">
+		<p id="username">{{animals[userid].name}} (You)</p>
+	</section>
 </div>
 <div id="subheader">
 	<section class="level-select" ng-show="showLevelSelect">
@@ -24,4 +28,11 @@
 			<p>{{definition}}</p>
 		</div>
   </section>
+	<section class="game-screen" ng-show="showScore">
+		<h2 >Great work {{animals[userid].name}}!</h2>
+		<p >You earned {{points}} points.</p>
+		<div id="game-info-right">
+
+		</div>
+	</section>
 </div>
