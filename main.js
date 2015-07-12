@@ -43,7 +43,7 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
     });
 
 	var inactionCounter = 0;
-	var totalTimePerWord = 10;
+	var totalTimePerWord = 60;
 
 	$scope.points = 0;
 	$scope.secondsCounter = 0;
