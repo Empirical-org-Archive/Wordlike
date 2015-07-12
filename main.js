@@ -131,6 +131,7 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 	$scope.compare = function() {
 
 		inactionCounter = 0;
+
 		$scope.input = $scope.input.toLowerCase();
 
 		for (var i = $scope.words.length - 1; i >= 0; i--) {
@@ -209,7 +210,9 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 		$scope.resetLevel();
 		$scope.getLevelData($scope.currentLevelInfo.levelNumber + 1);
 		$scope.status = "Next Level";
-
+		$scope.showStartButton = true;
+		$scope.showScoreButton = false;
+		$scope.switchState(2);
 
 	}
 
