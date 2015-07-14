@@ -115,15 +115,15 @@ a:hover {
   padding-right: 20%;
 }
 #game-info-left #round-number{
-  color: #AAAAAA;
+  color: #4d4d4d;
 }
 #game-info-right #timer{
-  color: #AAAAAA;
+  color: #4d4d4d;
   font-size: 20px;
   font-weight: bold;
 }
 #game-info-right #points{
-  color: #AAAAAA;
+  color: #4d4d4d;
   font-size: 20px;
   font-weight: bold;
 }
@@ -148,10 +148,20 @@ a:hover {
   padding-left: 5px;
 }
 #game .form-div{
-  width: 50%;
+  width: 70%;
   text-align: center;
   margin-right: auto;
   margin-left: auto;
+}
+#game .form-div #purple-box-container{
+  height: 100px;
+}
+#game .form-div #purple-box{
+  color: white;
+  padding-top: 7px;
+  margin-top: 0px;
+  height: 40px;
+  background-color: #a782a8;
 }
 #game .form-div #check-button{
   display: block;
@@ -161,11 +171,13 @@ a:hover {
 
 }
 #game .form-div #main-input{
-  margin-top: 25px;
-  font-size: 20px;
+
+  margin-top: 30px;
+  font-size: 32px;
   font-family: 'Open Sans', sans-serif;;
   text-align: center;
-  height: 30px;
+  height: 50px;
+  width: 450px;
 
 }
 #game .form-div form{

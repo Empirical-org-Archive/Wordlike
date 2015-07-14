@@ -6,8 +6,8 @@ app.run(function ($templateCache){
 	$templateCache.put('synonym-mini-game.html', '');
 });
 
-app.controller("AppCtrl", ['$scope', '$http','$sce', '$window', '$location', '$compile', '$interval', '$firebase','$sanitize' , '$firebaseObject', '$firebaseArray',
-function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebase, $sanitize, $firebaseObject, $firebaseArray) {
+app.controller("AppCtrl", ['$scope', '$http','$timeout' ,'$sce', '$window', '$location', '$compile', '$interval', '$firebase','$sanitize' , '$firebaseObject', '$firebaseArray',
+function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval, $firebase, $sanitize, $firebaseObject, $firebaseArray) {
 
 	$scope.userid = Math.round(Math.random() * 586);
 	$scope.animals = [];
@@ -24,12 +24,14 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 
 
 	$scope.LevelGetPromise = $http.get('LevelList.json').success(function(response) {levelList = response.levels; $scope.levelListHTML = levelList.length});
+	var endOfRoundCountdownPromise;
+	var startOfRoundCountdownPromise;
 
 	var amOnline = new Firebase('https://synonymtest1.firebaseio.com/.info/connected');
 	var presenceRef = new Firebase('https://synonymtest1.firebaseio.com/presence/');
 	var userRef = presenceRef.push();
 
-	var roomRef = new Firebase('https://synonymtest1.firebaseio.com/roomInfo')
+	var roomRef = new Firebase('https://synonymtest1.firebaseio.com/roomInfo');
 
 	$scope.players = $firebaseArray(presenceRef);
 	$scope.sortedPlayerList = [];
@@ -59,7 +61,9 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 	var listIndex = 0;
 	var synTracker = [];
 
+
 	$scope.currentLevelInfo = {};//used to store the all the info about the level retreived from the json file
+
 
 
 	$scope.showSubmit = true;
@@ -69,6 +73,9 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 	//getLevelData(), gets the level from the level number specified
 	//retrieves the level data from the JSON level list
 	$scope.getLevelData = function(level){
+		//hides the box used to show the score
+		$("#purple-box").hide();
+
 			//checks all the members of the json file to see which level's LevlNumber matches the one specified in the parameter
 			for(var i =0; i < levelList.length; i++){
 				if(levelList[i].levelNumber == level){
@@ -79,13 +86,14 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 			}
 			console.log($scope.currentLevelInfo);
 			//gets the json file and sets it to the word list
-			$http.get($scope.currentLevelInfo.levelFile).success(function(response) {$scope.wordlist = response.data;});
+			$http.get($scope.currentLevelInfo.levelFile).success(function(response) {$scope.wordlist = response.data; $scope.fetchData();});
+
 
 	}
 	//used to parse the json file and place all objects into the word[] array
 	$scope.fetchData = function() {
 
-		setInputState(false);
+		$scope.setInputState(true);
 
 		$scope.showSubmit = false;
 
@@ -118,12 +126,15 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 		$scope.definition = $scope.wordlist[listIndex].definition;
 		$scope.status = "";
 		$scope.wordnumber = listIndex + 1;
-		timerStart();
+		$scope.lastPointIncrease = 4;
+		startOfRoundCountdownPromise = $interval(countDowntoGameStart, 1000);
+
+
 	};
 
 	$scope.selectLevel =function(level){
 		$location.path("/app.html/level" + level);
-		$scope.switchState();
+		$scope.switchState(2);
 		console.log(level);
 	}
 
@@ -147,6 +158,8 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 					$scope.words[i].points = "+ " + ($scope.words[i].word.length - $scope.words[i].toSwap);
 					$scope.lastPointIncrease = $scope.words[i].points;
 					userRef.update({points: $scope.points});
+					fadeOutBox(500);
+
 
 
 					trackerRemove(i);
@@ -158,19 +171,31 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 					return;
 				}
 			}
+
+
+
 		};
+		//handles fading in and out of the score
+		//$("#purple-box").fadeOut("slow");
 
 		$scope.status = "That word didn't work. Try again.";
 		$scope.input = "";
 	};
-	//switches states between the level select screen and the game itself
+	//switches states between the level select screen and the game itself and the score screen
 	$scope.switchState = function(state){
+		//show level select
 		if(state == 1)
 		{
+			//used to cancel the promises if changing a level
+			$interval.cancel(startOfRoundCountdownPromise);
+			$interval.cancel(endOfRoundCountdownPromise);
+			$interval.cancel(intervalPromise);
 			$scope.showGame = false;
 			$scope.showScore = false;
 			$scope.showLevelSelect = true;
+
 		}
+		//show game
 		if(state == 2)
 		{
 			$scope.showGame = true;
@@ -178,6 +203,7 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 			$scope.showLevelSelect = false;
 
 		}
+		//show score screen
 		if(state == 3)
 		{
 			$scope.showGame = false;
@@ -229,6 +255,24 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 
 	}
 
+	var fadeOutBox = function(time){
+		$("#purple-box").show();
+		setTimeout(function(){
+			$("#purple-box").fadeOut("fast");
+		}, time);
+	}
+	var countDowntoGameStart = function(){
+		$scope.lastPointIncrease --;
+		fadeOutBox(500);
+
+		if($scope.lastPointIncrease == 0){
+			$scope.setInputState(false);
+			$scope.lastPointIncrease = "Go!";
+			$interval.cancel(startOfRoundCountdownPromise);
+			startOfRoundCountdownPromise = null;
+			timerStart();
+		}
+	}
 
 		//Helper functions
 	//checks to see if there is a next level
@@ -248,12 +292,13 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 		}
 	}
 
+
+
 	//gets the player list and sorts them by the amount of points they have
 	var sortPlayers = function(){
 		$scope.sortedPlayerList = [];
 		var scores = [];
 		var playerTemp = $scope.players;
-		console.log(playerTemp);
 		for(var i = 0; i < $scope.players.length; i++){
 			scores.push($scope.players[i].points);
 
@@ -289,13 +334,37 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 			}
 		};
 	}
+	//checks to see if there are any words left for the player to fill in
+	var checkWordsLeft = function(){
+		var wordcount = 0;
+		for(var i=0; i < $scope.words.length; i++)
+		{
+			if($scope.words[i].strike == true)
+			{
+				wordcount++;
+			}
+		}
+		if(wordcount == $scope.words.length)
+		{
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	var endRound = function(){
+		$scope.setInputState(true);
+		$scope.switchState(3);
+	}
+
 
 	//Timer functions and stuff
 	var inactionTrigger = function() {
 
 		inactionCounter = 0;
 
-		var wordIndex = Math.round(Math.random() * (synTracker.length - 1));
+		var wordIndex = Math.round(Math.random() * (synTracker.length -1));
 		var item = $scope.words[synTracker[wordIndex]];
 		item.dummy = replaceAt(item.dummy, item.toSwap, item.word.charAt(item.toSwap));
 		item.toSwap++;
@@ -336,19 +405,22 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 		}
 
 		$scope.showSubmit = true;
+
+
 	}
 
 	var timerStart = function() {
-
 		$scope.secondsCounter = totalTimePerWord;
 		$scope.active = true;
 
-		if (intervalPromise == null) {intervalPromise = $interval(timerTick, 1000);}
+		if (intervalPromise == null) {intervalPromise = $interval(timerTick, 1000); }
 	}
 
 	var timerStop = function() {
 
-		$interval.cancel(intervalPromise);
+		if($interval.cancel(intervalPromise)){
+			endOfRoundCountdownPromise = $timeout(endRound, 3000);
+		}
 		intervalPromise = null;
 		$scope.active = false;
 	}
@@ -359,9 +431,18 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 			$scope.secondsCounter--;
 			inactionCounter++;
 			sortPlayers();
-			if($scope.secondsCounter === 0) {
+			//checks if all the words have been entered
+			if(checkWordsLeft() == true)
+			{
+				$scope.secondsCounter = 0;
+			}
+			if($scope.secondsCounter == 0) {
+
 	        	timerStop();
 	        	outOfTime();
+
+
+
 			}
 			else if(inactionCounter == 1) {
 				inactionTrigger();
@@ -369,7 +450,7 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
 		}
 	}
 	//sets the input to disabled (greys it out)
-	var setInputState = function(state){
+	$scope.setInputState = function(state){
 
 			$("#main-input").prop('disabled', state)
 
@@ -388,7 +469,7 @@ function ($scope, $http, $sce, $window, $location, $compile, $interval, $firebas
   		}
 	});
 }]);
-
+//NOT IN USE AS OF JULY 12 2015
 //this is used to create all of the buttons for all of the levels in the level select
 app.directive("level", function($compile, $http){
 	return function($scope, element, attrs){

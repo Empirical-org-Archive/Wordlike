@@ -32,7 +32,7 @@
 		<h2 >Great work {{animals[userid].name}}!</h2>
 		<p >You earned {{points}} points.</p>
 		<div id="score-buttons">
-		  <button id="next-button" ng-hide="showNextLevelButton" ng-click="fetchData(); switchState(2); showScoreButton=false;">Next Word</button>
+		  <button id="next-button" ng-hide="showNextLevelButton" ng-click="fetchData(); switchState(2); ">Next Word</button>
 			<button id="level-button" ng-show="showNextLevelButton" ng-click="changeLevel();">Next Level</button>
 
 		</div>

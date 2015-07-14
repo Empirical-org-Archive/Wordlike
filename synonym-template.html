@@ -2,20 +2,20 @@
 <div class="word-list">
 		<table>
 			<tr>
-				<td><p ng-hide="words[0].strike">{{words[0].dummy}}</p><p><strike ng-show="words[0].strike">{{words[0].dummy}}</strike></p></td>
-				<td><p ng-hide="words[1].strike">{{words[1].dummy}}</p><p><strike ng-show="words[1].strike">{{words[1].dummy}}</strike></p></td>
-				<td><p ng-hide="words[2].strike">{{words[2].dummy}}</p><p><strike ng-show="words[2].strike">{{words[2].dummy}}</strike></p></td>
-				<td><p ng-hide="words[3].strike">{{words[3].dummy}}</p><p><strike ng-show="words[3].strike">{{words[3].dummy}}</strike></p></td>
+				<td><p ng-hide="words[0].strike">{{words[0].dummy}}</p><p style="background-color: #ececec;"><strike ng-show="words[0].strike">{{words[0].dummy}}</strike></p></td>
+				<td><p ng-hide="words[1].strike">{{words[1].dummy}}</p><p style="background-color: #ececec;"><strike ng-show="words[1].strike">{{words[1].dummy}}</strike></p></td>
+				<td><p ng-hide="words[2].strike">{{words[2].dummy}}</p><p style="background-color: #ececec;"><strike ng-show="words[2].strike">{{words[2].dummy}}</strike></p></td>
+				<td><p ng-hide="words[3].strike">{{words[3].dummy}}</p><p style="background-color: #ececec;"><strike ng-show="words[3].strike">{{words[3].dummy}}</strike></p></td>
 			</tr>
 			<tr>
-				<td><p ng-hide="words[4].strike">{{words[4].dummy}}</p><p><strike ng-show="words[4].strike">{{words[4].dummy}}</strike></p></td>
-				<td><p ng-hide="words[5].strike">{{words[5].dummy}}</p><p><strike ng-show="words[5].strike">{{words[5].dummy}}</strike></p></td>
-				<td><p ng-hide="words[6].strike">{{words[6].dummy}}</p><p><strike ng-show="words[6].strike">{{words[6].dummy}}</strike></p></td>
-				<td><p ng-hide="words[7].strike">{{words[7].dummy}}</p><p><strike ng-show="words[7].strike">{{words[7].dummy}}</strike></p></td>
+				<td><p ng-hide="words[4].strike">{{words[4].dummy}}</p><p style="background-color: #ececec;"><strike ng-show="words[4].strike">{{words[4].dummy}}</strike></p></td>
+				<td><p ng-hide="words[5].strike">{{words[5].dummy}}</p><p style="background-color: #ececec;"><strike ng-show="words[5].strike">{{words[5].dummy}}</strike></p></td>
+				<td><p ng-hide="words[6].strike">{{words[6].dummy}}</p><p style="background-color: #ececec;"><strike ng-show="words[6].strike">{{words[6].dummy}}</strike></p></td>
+				<td><p ng-hide="words[7].strike">{{words[7].dummy}}</p><p style="background-color: #ececec;"><strike ng-show="words[7].strike">{{words[7].dummy}}</strike></p></td>
 			</tr>
 			<tr>
-				<td><p ng-hide="words[8].strike">{{words[8].dummy}}</p><p><strike ng-show="words[8].strike">{{words[8].dummy}}</strike></p></td>
-				<td><p ng-hide="words[9].strike">{{words[9].dummy}}</p><p><strike ng-show="words[9].strike">{{words[9].dummy}}</strike></p></td>
+				<td><p ng-hide="words[8].strike">{{words[8].dummy}}</p><p style="background-color: #ececec;"><strike ng-show="words[8].strike">{{words[8].dummy}}</strike></p></td>
+				<td><p ng-hide="words[9].strike">{{words[9].dummy}}</p><p style="background-color: #ececec;"><strike ng-show="words[9].strike">{{words[9].dummy}}</strike></p></td>
 				<td></td>
 				<td></td>
 			</tr>
@@ -23,18 +23,16 @@
 </div>
 
 <div class="form-div" >
-	<h1 style="background-color:green;">{{lastPointIncrease}}</h1>
+	<div id="purple-box-container">
+		<h1 id="purple-box" >{{lastPointIncrease}}</h1>
+	</div>
 	<form ng-submit="compare()">
-		<h1>{{status}}</h1>
-		<input placeholder="Enter a Synonym" id="main-input" type="text" ng-model="input">
+		<input placeholder="Synonym for {{myWord}}" id="main-input" type="text" ng-model="input">
 		<button id="check-button" >Check Word</button>
 		<p>or press enter...</p>
 
 		<div id="next-button" ng-show="showStartButton">
 			<button ng-click="fetchData()">Start</button>
-		</div>
-		<div id="score-button" ng-show="showScoreButton">
-			<button ng-click="switchState(3)">Show Scores</button>
 		</div>
 
 
