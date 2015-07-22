@@ -2,7 +2,7 @@
 "data": [
 	{ "word":"saunter", "definition":"walk in a slow, relaxed manner, without hurry or effort.", "synonyms": [
 		{"syn":"stroll"}, {"syn":"ramble"}, {"syn":"promenade"}, {"syn":"mosey"}, {"syn":"tread"},
-		{"syn":"schlepp"}, {"syn":"stride"}, {"syn":"traipse"}, {"syn":"hike"}, {"syn":"step"}
+		{"syn":"schlep"}, {"syn":"stride"}, {"syn":"traipse"}, {"syn":"hike"}, {"syn":"step"}
 	]},
 	{ "word":"debate", "definition":"a formal discussion on a particular topic in a public meeting, in which opposing arguments are put forward.", "synonyms": [
 		{"syn":"argument"}, {"syn":"contest"}, {"syn":"controversy"}, {"syn":"dispute"}, {"syn":"match"},

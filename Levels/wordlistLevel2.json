@@ -9,7 +9,7 @@
 		{"syn":"unconstrained"}, {"syn":"separate"}, {"syn":"alone"}, {"syn":"unconnected"}
 	]},
 	{ "word":"mischief", "definition":"playfulness that is intended to tease, mock, or create trouble", "synonyms": [
-		{"syn":"trouble"}, {"syn":"prank"}, {"syn":"naughtiness"}, {"syn":"sneakiness"}, {"syn":"misbehavior"},
+		{"syn":"trouble"}, {"syn":"prank"}, {"syn":"naughtiness"}, {"syn":"sneakiness"},
 		{"syn":"misbehavior"}, {"syn":"slyness"}, {"syn":"damage"}
 	]}
 ]}

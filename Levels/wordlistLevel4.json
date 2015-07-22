@@ -8,7 +8,7 @@
 		{"syn":"path"}, {"syn":"course"}, {"syn":"direction"}, {"syn":"passage"}, {"syn":"track"},
 		{"syn":"trail"}, {"syn":"road"}, {"syn":"plot"}, {"syn":"itinerary"}, {"syn":"journey"}
 	]},
-	{ "word":"hardworking", "definition":"(of a person) tending to work with energy and commitment.", "synonyms": [
+	{ "word":"hard-working", "definition":"(of a person) tending to work with energy and commitment.", "synonyms": [
 		{"syn":"dedicated"}, {"syn":"diligent"}, {"syn":"resolute"}, {"syn":"industrious"}, {"syn":"persistent"},
 		{"syn":"laborious"}, {"syn":"tireless"}, {"syn":"steadfast"}, {"syn":"incessant"}, {"syn":"enduring"}
 	]}

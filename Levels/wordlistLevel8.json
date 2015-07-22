@@ -5,11 +5,11 @@
 		{"syn":"enlarge"}, {"syn":"amplify"}, {"syn":"widen"}, {"syn":"ascend"}, {"syn":"raise"}
 	]},
 	{ "word":"strategy", "definition":"a plan of action or policy designed to achieve a major or overall aim.", "synonyms": [
-		{"syn":"gameplan"}, {"syn":"method"}, {"syn":"scheme"}, {"syn":"approach"}, {"syn":"design"},
+		{"syn":"game plan"}, {"syn":"method"}, {"syn":"scheme"}, {"syn":"approach"}, {"syn":"design"},
 		{"syn":"project"}, {"syn":"procedure"}, {"syn":"angle"}, {"syn":"blueprint"}, {"syn":"action"}
 	]},
 	{ "word":"thrifty", "definition":" using money and other resources carefully and not wastefully.", "synonyms": [
 		{"syn":"cheap"}, {"syn":"savings"}, {"syn":"sparing"}, {"syn":"bargain"}, {"syn":"sale"},
-		{"syn":"lowered"}, {"syn":"budget"}, {"syn":"economical"}, {"syn":"reduced price"}, {"syn":"cheapo"}
+		{"syn":"lowered"}, {"syn":"budget"}, {"syn":"economical"}, {"syn":"reduced price"}
 	]}
 ]}

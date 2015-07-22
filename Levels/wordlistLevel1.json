@@ -1,7 +1,7 @@
 {
 "data": [
 	{ "word":"abolish", "definition":"formally put an end to.", "synonyms": [
-		{"syn":"nulify"}, {"syn":"suppress"}, {"syn":"eradicate"}, {"syn":"terminate"}, {"syn":"disolve"}, {"syn":"cancel"},
+		{"syn":"nullify"}, {"syn":"suppress"}, {"syn":"eradicate"}, {"syn":"terminate"}, {"syn":"dissolve"}, {"syn":"cancel"},
 		{"syn":"repeal"}, {"syn":"prohibit"}, {"syn":"revoke"}, {"syn":"extinguish"}
 	]},
 	{ "word":"gorge", "definition":"a narrow valley between hills or mountains.", "synonyms": [
