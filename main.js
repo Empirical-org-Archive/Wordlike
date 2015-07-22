@@ -150,6 +150,7 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 			if($scope.words[i].word == $scope.input) {
 
 				if(!$scope.words[i].strike){
+					$("#purple-box").hide();
 					$scope.status = "Good job!";
 					$scope.input = "";
 					$scope.words[i].dummy = $scope.words[i].word;
@@ -158,9 +159,8 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 					$scope.words[i].points = "+ " + ($scope.words[i].word.length - $scope.words[i].toSwap);
 					$scope.lastPointIncrease = $scope.words[i].points;
 					userRef.update({points: $scope.points});
-					fadeOutBox(500);
 
-
+					fadeOutBox(2000);
 
 					trackerRemove(i);
 					return;
@@ -256,19 +256,22 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 	}
 
 	var fadeOutBox = function(time){
+		$("#purple-box").stop(true, true);
 		$("#purple-box").show();
 		setTimeout(function(){
 			$("#purple-box").fadeOut("fast");
 		}, time);
 	}
+
 	var countDowntoGameStart = function(){
 		$scope.lastPointIncrease --;
-		fadeOutBox(500);
+		$("#purple-box").show();
 
 		if($scope.lastPointIncrease == 0){
 			$scope.setInputState(false);
 			$scope.lastPointIncrease = "Go!";
 			$interval.cancel(startOfRoundCountdownPromise);
+			fadeOutBox(500);
 			startOfRoundCountdownPromise = null;
 			timerStart();
 		}
@@ -296,11 +299,22 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 
 	//gets the player list and sorts them by the amount of points they have
 	var sortPlayers = function(){
+
 		$scope.sortedPlayerList = [];
 		var scores = [];
 		var playerTemp = $scope.players;
+		var type;
+
 		for(var i = 0; i < $scope.players.length; i++){
-			scores.push($scope.players[i].points);
+
+			if($scope.players[i].points != 'undefined'){
+
+				scores.push($scope.players[i].points);
+			}
+			else
+			{
+				$scope.players.splice(i,1);
+			}
 
 		}
 
@@ -354,6 +368,7 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 	}
 
 	var endRound = function(){
+		sortPlayers();
 		$scope.setInputState(true);
 		$scope.switchState(3);
 	}
@@ -419,7 +434,8 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 	var timerStop = function() {
 
 		if($interval.cancel(intervalPromise)){
-			endOfRoundCountdownPromise = $timeout(endRound, 3000);
+			sortPlayers();
+			endOfRoundCountdownPromise = $timeout(endRound, 4000);
 		}
 		intervalPromise = null;
 		$scope.active = false;
@@ -430,7 +446,7 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 		if($scope.active) {
 			$scope.secondsCounter--;
 			inactionCounter++;
-			sortPlayers();
+
 			//checks if all the words have been entered
 			if(checkWordsLeft() == true)
 			{

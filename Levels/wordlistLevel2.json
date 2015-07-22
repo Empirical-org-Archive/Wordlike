@@ -1,15 +1,36 @@
 {
 "data": [
-	{ "word":"perish", "definition":"suffer death, typically in a violent, sudden", "synonyms": [
-		{"syn":"die"}, {"syn":"decay"}, {"syn":"crumble"}, {"syn":"cease"}, {"syn":"wither"},
-		{"syn":"decline"}, {"syn":"succumb"}, {"syn":"decompose"}, {"syn":"decease"}, {"syn":"rot"}
+	{ "word":"deliberate", "definition":"to do something intentionally", "synonyms": [
+		{"syn":"calculated"}, {"syn":"prearranged"}, {"syn":"intentional"}, {"syn":"willful"}, {"syn":"thought-out"},
+		{"syn":"conscious"}, {"syn":"schemed"}, {"syn":"done on purpose"}, {"syn":"intended"}, {"syn":"purposeful"}
 	]},
-	{ "word":"independent", "definition":"free from outside control; not depending on another's authority ", "synonyms": [
-		{"syn":"absolute"}, {"syn":"individualistic"}, {"syn":"free"}, {"syn":"uncontrolled"}, {"syn":"autonomous"},
-		{"syn":"unconstrained"}, {"syn":"separate"}, {"syn":"alone"}, {"syn":"unconnected"}
+	{ "word":"triumph", "definition":"a great achievement", "synonyms": [
+		{"syn":"success"}, {"syn":"conquest"}, {"syn":"win"}, {"syn":"accomplishment"}, {"syn":"victory"},
+		{"syn":"feat"}, {"syn":"gain"}, {"syn":"grand-slam"}, {"syn":"sensation"}, {"syn":"hit"}
 	]},
-	{ "word":"mischief", "definition":"playfulness that is intended to tease, mock, or create trouble", "synonyms": [
-		{"syn":"trouble"}, {"syn":"prank"}, {"syn":"naughtiness"}, {"syn":"sneakiness"},
-		{"syn":"misbehavior"}, {"syn":"slyness"}, {"syn":"damage"}
+	{ "word":"numb", "definition":"deprived of the power of sensation", "synonyms": [
+	  {"syn":"insensitive"}, {"syn":"unfeeling"}, {"syn":"senseless"}, {"syn":"detached"}, {"syn":"indifferent"},
+	  {"syn":"passionless"}, {"syn":"vacuous"}, {"syn":"unresponsive"}, {"syn":"indifferent"}, {"syn":"reticent"}
+	]},
+	{ "word":"tether", "definition":"a rope with which an animal is tied to restrict its movement", "synonyms": [
+	  {"syn":"shackle"}, {"syn":"restraint"}, {"syn":"harness"}, {"syn":"leash"}, {"syn":"bond"},
+	  {"syn":"chain"}, {"syn":"binding"}, {"syn":"fetter"}, {"syn":"strap"}, {"syn":"cord"}
+	]},
+	{ "word":"prod", "definition":"poke (someone) with a finger, foot, or pointed object", "synonyms": [
+	  {"syn":"nudge"}, {"syn":"poke"}, {"syn":"pick at"}, {"syn":"jab"}, {"syn":"dig"},
+	  {"syn":"bother"}, {"syn":"press"}, {"syn":"prompt"}, {"syn":"motivate"}, {"syn":"rouse"}
+	]},
+	{ "word":"disclose", "definition":"make (secret or new information) known.", "synonyms": [
+	  {"syn":"unveil"}, {"syn":"confess"}, {"syn":"reveal"}, {"syn":"tell"}, {"syn":"uncover"},
+	  {"syn":"expose"}, {"syn":"divulge"}, {"syn":"show"}, {"syn":"blab"}, {"syn":"broadcast"}
+	]},
+	{ "word":"culprit", "definition":"a person who is responsible for a crime or other misdeed", "synonyms": [
+	  {"syn":"rascal"}, {"syn":"perpetrator"}, {"syn":"wrongdoer"}, {"syn":"offender"}, {"syn":"miscreant"},
+	  {"syn":"convict"}, {"syn":"criminal"}, {"syn":"felon"}, {"syn":"evildoer"}, {"syn":"transgressor"}
+	]},
+	{ "word":"employed", "definition":"give work to (someone) and pay them for it.", "synonyms": [
+	  {"syn":"hired"}, {"syn":"occupied"}, {"syn":"engaged"}, {"syn":"busy"}, {"syn":"laboring"},
+	  {"syn":"working"}, {"syn":"active"}, {"syn":"affiliated with"}, {"syn":"involved in"}, {"syn":"engrossed"}
 	]}
+
 ]}
