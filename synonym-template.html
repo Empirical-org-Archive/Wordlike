@@ -2,20 +2,22 @@
 <div class="word-list">
 		<table>
 			<tr>
-				<td><p ng-hide="words[0].strike">{{words[0].dummy}}</p><p style="background-color: #ececec;"><strike ng-show="words[0].strike">{{words[0].dummy}}</strike></p></td>
-				<td><p ng-hide="words[1].strike">{{words[1].dummy}}</p><p style="background-color: #ececec;"><strike ng-show="words[1].strike">{{words[1].dummy}}</strike></p></td>
-				<td><p ng-hide="words[2].strike">{{words[2].dummy}}</p><p style="background-color: #ececec;"><strike ng-show="words[2].strike">{{words[2].dummy}}</strike></p></td>
-				<td><p ng-hide="words[3].strike">{{words[3].dummy}}</p><p style="background-color: #ececec;"><strike ng-show="words[3].strike">{{words[3].dummy}}</strike></p></td>
+				<td><p><span ng-hide="words[0].strike">{{words[0].dummy}}</span></p><p ng-show="words[0].strike" style="background-color: #ececec;"><span ><strike>{{words[0].dummy}}</strike></span><span style="float:right; padding-right: 5px; color:green;">{{words[0].points}}</span></p></td>
+				<td><p><span ng-hide="words[1].strike">{{words[1].dummy}}</span></p><p ng-show="words[1].strike" style="background-color: #ececec;"><span ><strike>{{words[1].dummy}}</strike></span><span style="float:right; padding-right: 5px; color:green;">{{words[1].points}}</span></p></td>
+				<td><p><span ng-hide="words[2].strike">{{words[2].dummy}}</span></p><p ng-show="words[2].strike" style="background-color: #ececec;"><span ><strike>{{words[2].dummy}}</strike></span><span style="float:right; padding-right: 5px; color:green;">{{words[2].points}}</span></p></td>
+				<td><p><span ng-hide="words[3].strike">{{words[3].dummy}}</span></p><p ng-show="words[3].strike" style="background-color: #ececec;"><span ><strike>{{words[3].dummy}}</strike></span><span style="float:right; padding-right: 5px; color:green;">{{words[3].points}}</span></p></td>
+
 			</tr>
 			<tr>
-				<td><p ng-hide="words[4].strike">{{words[4].dummy}}</p><p style="background-color: #ececec;"><strike ng-show="words[4].strike">{{words[4].dummy}}</strike></p></td>
-				<td><p ng-hide="words[5].strike">{{words[5].dummy}}</p><p style="background-color: #ececec;"><strike ng-show="words[5].strike">{{words[5].dummy}}</strike></p></td>
-				<td><p ng-hide="words[6].strike">{{words[6].dummy}}</p><p style="background-color: #ececec;"><strike ng-show="words[6].strike">{{words[6].dummy}}</strike></p></td>
-				<td><p ng-hide="words[7].strike">{{words[7].dummy}}</p><p style="background-color: #ececec;"><strike ng-show="words[7].strike">{{words[7].dummy}}</strike></p></td>
+				<td><p><span ng-hide="words[4].strike">{{words[4].dummy}}</span></p><p ng-show="words[4].strike" style="background-color: #ececec;"><span ><strike>{{words[4].dummy}}</strike></span><span style="float:right; padding-right: 5px; color:green;">{{words[4].points}}</span></p></td>
+				<td><p><span ng-hide="words[5].strike">{{words[5].dummy}}</span></p><p ng-show="words[5].strike" style="background-color: #ececec;"><span ><strike>{{words[5].dummy}}</strike></span><span style="float:right; padding-right: 5px; color:green;">{{words[5].points}}</span></p></td>
+				<td><p><span ng-hide="words[6].strike">{{words[6].dummy}}</span></p><p ng-show="words[6].strike" style="background-color: #ececec;"><span ><strike>{{words[6].dummy}}</strike></span><span style="float:right; padding-right: 5px; color:green;">{{words[6].points}}</span></p></td>
+				<td><p><span ng-hide="words[7].strike">{{words[7].dummy}}</span></p><p ng-show="words[7].strike" style="background-color: #ececec;"><span ><strike>{{words[7].dummy}}</strike></span><span style="float:right; padding-right: 5px; color:green;">{{words[7].points}}</span></p></td>
 			</tr>
 			<tr>
-				<td><p ng-hide="words[8].strike">{{words[8].dummy}}</p><p style="background-color: #ececec;"><strike ng-show="words[8].strike">{{words[8].dummy}}</strike></p></td>
-				<td><p ng-hide="words[9].strike">{{words[9].dummy}}</p><p style="background-color: #ececec;"><strike ng-show="words[9].strike">{{words[9].dummy}}</strike></p></td>
+				<td><p><span ng-hide="words[8].strike">{{words[8].dummy}}</span></p><p ng-show="words[8].strike" style="background-color: #ececec;"><span ><strike>{{words[8].dummy}}</strike></span><span style="float:right; padding-right: 5px; color:green;">{{words[8].points}}</span></p></td>
+				<td><p><span ng-hide="words[9].strike">{{words[9].dummy}}</span></p><p ng-show="words[9].strike" style="background-color: #ececec;"><span ><strike>{{words[9].dummy}}</strike></span><span style="float:right; padding-right: 5px; color:green;">{{words[9].points}}</span></p></td>
+
 				<td></td>
 				<td></td>
 			</tr>
@@ -26,8 +28,8 @@
 	<div id="purple-box-container">
 		<h1 id="purple-box" >{{lastPointIncrease}}</h1>
 	</div>
-	<form ng-submit="compare()">
-		<input placeholder="Synonym for {{myWord}}" id="main-input" type="text" ng-model="input">
+	<form ng-submit="compare(true)">
+		<input  placeholder="Synonym for {{myWord}}" id="main-input" type="text" ng-model="input" ng-change="compare(false);">
 		<button id="check-button" >Check Word</button>
 		<p>or press enter...</p>
 

@@ -9,18 +9,20 @@ app.run(function ($templateCache){
 app.controller("AppCtrl", ['$scope', '$http','$timeout' ,'$sce', '$window', '$location', '$compile', '$interval', '$firebase','$sanitize' , '$firebaseObject', '$firebaseArray',
 function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval, $firebase, $sanitize, $firebaseObject, $firebaseArray) {
 
+
 	$scope.userid = Math.round(Math.random() * 586);
 	$scope.animals = [];
 	$scope.showLevelSelect = true;
 	$scope.showGame = false;
 	$scope.showScore = false;
+	$scope.showGoal = false;
 	$scope.showNextLevelButton = false;
 	$scope.showStartButton = true;
-	$scope.showScoreButton = false;
+	$scope.showCompletedGoal = false;
 	$http.get("animals.json").success(function(response) { $scope.animals = response.data; });
 
 	$scope.levelListHTML = "";//used to store the html used to make the level list
-	var leveList;//used for storing the list of levels from the JSON file
+	var leveList = [];//used for storing the list of levels from the JSON file
 
 
 	$scope.LevelGetPromise = $http.get('LevelList.json').success(function(response) {levelList = response.levels; $scope.levelListHTML = levelList.length});
@@ -45,8 +47,9 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
     });
 
 	var inactionCounter = 0;
-	var totalTimePerWord = 60;
 
+	var totalTimePerWord = 5;
+	$scope.goalNumber = 5;
 	$scope.points = 0;
 	$scope.secondsCounter = 0;
 	$scope.showSubmit = true;
@@ -60,6 +63,7 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 	$scope.wordnumber = 0;
 	var listIndex = 0;
 	var synTracker = [];
+	$scope.correctWords = [];
 
 
 	$scope.currentLevelInfo = {};//used to store the all the info about the level retreived from the json file
@@ -86,12 +90,13 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 			}
 			console.log($scope.currentLevelInfo);
 			//gets the json file and sets it to the word list
-			$http.get($scope.currentLevelInfo.levelFile).success(function(response) {$scope.wordlist = response.data; $scope.fetchData();});
+			$http.get($scope.currentLevelInfo.levelFile).success(function(response) {$scope.wordlist = response.data; });
 
 
 	}
 	//used to parse the json file and place all objects into the word[] array
 	$scope.fetchData = function() {
+		$scope.correctWords = [];
 
 		$scope.setInputState(true);
 
@@ -135,12 +140,10 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 	$scope.selectLevel =function(level){
 		$location.path("/app.html/level" + level);
 		$scope.switchState(2);
-		console.log(level);
 	}
 
 	//used to compare word to user input
-	$scope.compare = function() {
-
+	$scope.compare = function(pressedEnter) {
 		inactionCounter = 0;
 
 		$scope.input = $scope.input.toLowerCase();
@@ -158,28 +161,28 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 					$scope.points += $scope.words[i].word.length - $scope.words[i].toSwap;
 					$scope.words[i].points = "+ " + ($scope.words[i].word.length - $scope.words[i].toSwap);
 					$scope.lastPointIncrease = $scope.words[i].points;
-					userRef.update({points: $scope.points});
+					$scope.correctWords.push($scope.words[i]);
 
+					userRef.update({points: $scope.points});
 					fadeOutBox(2000);
 
 					trackerRemove(i);
 					return;
 				}
 				else {
-					$scope.status = "You entered that word already. Try again.";
-					$scope.input = "";
 					return;
 				}
 			}
+			if(pressedEnter == true){
+					$scope.input = "";
 
+			}
 
 
 		};
 		//handles fading in and out of the score
 		//$("#purple-box").fadeOut("slow");
 
-		$scope.status = "That word didn't work. Try again.";
-		$scope.input = "";
 	};
 	//switches states between the level select screen and the game itself and the score screen
 	$scope.switchState = function(state){
@@ -193,14 +196,16 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 			$scope.showGame = false;
 			$scope.showScore = false;
 			$scope.showLevelSelect = true;
+			$scope.showGoal = false;
 
 		}
 		//show game
 		if(state == 2)
 		{
-			$scope.showGame = true;
-			$scope.showScore = false;
-			$scope.showLevelSelect = false;
+				$scope.showGame = true;
+				$scope.showScore = false;
+				$scope.showLevelSelect = false;
+				$scope.showGoal = false;
 
 		}
 		//show score screen
@@ -209,7 +214,14 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 			$scope.showGame = false;
 			$scope.showScore = true;
 			$scope.showLevelSelect = false;
-
+			$scope.showGoal = false;
+		}
+		if(state == 4)
+		{
+			$scope.showGame = false;
+			$scope.showScore = false;
+			$scope.showLevelSelect = false;
+			$scope.showGoal = true;
 		}
 
 
@@ -273,6 +285,8 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 			$interval.cancel(startOfRoundCountdownPromise);
 			fadeOutBox(500);
 			startOfRoundCountdownPromise = null;
+			$("#main-input").focus();
+
 			timerStart();
 		}
 	}
@@ -303,11 +317,9 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 		$scope.sortedPlayerList = [];
 		var scores = [];
 		var playerTemp = $scope.players;
-		var type;
-
 		for(var i = 0; i < $scope.players.length; i++){
 
-			if($scope.players[i].points != 'undefined'){
+			if($scope.players[i].points != undefined || $scope.players[i].points != undefined){
 
 				scores.push($scope.players[i].points);
 			}
@@ -317,9 +329,7 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 			}
 
 		}
-
 		var HighestScore = Math.max.apply(null, scores);
-
 		for(var i = HighestScore; i >= 0; i--){
 			for(var j = 0; j < playerTemp.length; j++){
 				if($scope.players[j].points == i)
@@ -329,6 +339,7 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 
 				}
 			}
+
 		}
 
 	}
@@ -369,6 +380,14 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 
 	var endRound = function(){
 		sortPlayers();
+		if($scope.correctWords.length > $scope.goalNumber){
+			$scope.showCompletedGoal = true;
+
+		}
+		else{
+
+			$scope.showCompletedGoal = false;
+		}
 		$scope.setInputState(true);
 		$scope.switchState(3);
 	}
@@ -442,6 +461,7 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 	}
 
 	var timerTick = function() {
+	$("#main-input").focus();
 
 		if($scope.active) {
 			$scope.secondsCounter--;
@@ -549,6 +569,22 @@ app.directive('headtemp', function ($templateCache) {
 	return {
 		restrict: 'E',
 		templateUrl: 'header-template.html'
+	};
+});
+
+app.directive('goaltemp', function ($templateCache) {
+
+	return {
+		restrict: 'E',
+		templateUrl: 'goal-template.html'
+	};
+});
+
+app.directive('levellist', function ($templateCache) {
+
+	return {
+		restrict: 'E',
+		templateUrl: 'levellist-template.html'
 	};
 });
 

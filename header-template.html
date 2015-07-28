@@ -10,6 +10,10 @@
 		<img src="Quill-Logo.png" alt="Quill">
 		<p id="username">{{animals[userid].name}} (You)</p>
 	</section>
+	<section class="game-screen" ng-show="showGoal">
+		<img src="Quill-Logo.png" alt="Quill">
+		<p id="username">{{animals[userid].name}} (You)</p>
+	</section>
 </div>
 <div id="subheader">
 	<section class="level-select" ng-show="showLevelSelect">
@@ -29,15 +33,16 @@
 		</div>
   </section>
 	<section class="game-screen" ng-show="showScore">
-		<h2 >Great work {{animals[userid].name}}!</h2>
-		<p >You earned {{points}} points.</p>
-		<div id="score-buttons">
-		  <button id="next-button" ng-hide="showNextLevelButton" ng-click="fetchData(); switchState(2); ">Next Word</button>
+		<div  style="display:inline-block;" >
+			<h2 style="display:inline;" >Great work {{animals[userid].name}}!</h2>
+			<p >You earned {{points}} points.</p>
+		</div>
+			<button style="float: right; display:inline;" id="next-button" ng-hide="showNextLevelButton" ng-click="fetchData(); switchState(2); ">Next Round</button>
 			<button id="level-button" ng-show="showNextLevelButton" ng-click="changeLevel();">Next Level</button>
 
-		</div>
-			<div >
-			</div>
-
+	</section>
+	<section class="level-select" ng-show="showGoal">
+		<h2 >Tool: WordLike</h2>
+		<p >This tool will help you learn synonyms.</p>
 	</section>
 </div>
