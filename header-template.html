@@ -37,8 +37,8 @@
 			<h2 style="display:inline;" >Great work {{animals[userid].name}}!</h2>
 			<p >You earned {{points}} points.</p>
 		</div>
-			<button style="float: right; display:inline;" id="next-button" ng-hide="showNextLevelButton" ng-click="fetchData(); switchState(2); ">Next Round</button>
-			<button id="level-button" ng-show="showNextLevelButton" ng-click="changeLevel();">Next Level</button>
+			<button style="float: right; display:inline;" id="next-button" ng-hide="showEndofRoundStatus" ng-click="switchState(2);  fetchData();">Next Round</button>
+			<button style="float: right; display:inline;" id="level-button" ng-show="showEndofRoundStatus" ng-click="changeLevel();">Next Level</button>
 
 	</section>
 	<section class="level-select" ng-show="showGoal">
