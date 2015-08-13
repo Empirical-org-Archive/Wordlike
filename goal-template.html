@@ -1,7 +1,10 @@
+<!--This is the goal page. This is loaded when the user selects a level, and when the user moves to the next round or level
+  this shows a quick message about what the player is expected to achieve in the coming round.  A start button is also here
+  whioch brings the player to the game.-->
 <section id="goal" ng-show="showGoal">
   <div>
-    <h1>Your goal for this round is to get at least 5 words correct</h1>
+    <h1>Your goal for this level is to get at least {{goalNumberWords}} words correct per round.</h1>
     <h2>Do your best!</h2>
-    <button id="start-button" ng-click="fetchData(); switchState(2);">Start</button>
+    <button style="margin-top: 15px;" id="start-button" ng-click="fetchData(); switchState(2);">Start</button>
   </div>
 </section>
