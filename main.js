@@ -16,7 +16,7 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 	$scope.showGame = false;
 	$scope.showScore = false;
 	$scope.showGoal = false;
-	$scope.showNextLevelButton = false;
+	$scope.showEndofRoundStatus = false;
 	$scope.showStartButton = true;
 	$scope.showCompletedGoal = false;
 	$http.get("animals.json").success(function(response) { $scope.animals = response.data; });
@@ -48,11 +48,11 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 
 	var inactionCounter = 0;
 
-	var totalTimePerWord = 5;
-	$scope.goalNumber = 5;
+	var totalTimePerWord = 60;
+	$scope.goalNumberWords = 5;
 	$scope.points = 0;
 	$scope.secondsCounter = 0;
-	$scope.showSubmit = true;
+
 	$scope.showCompare = false;
 	$scope.lastPointIncrease = 0;
 
@@ -63,14 +63,15 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 	$scope.wordnumber = 0;
 	var listIndex = 0;
 	var synTracker = [];
-	$scope.correctWords = [];
+	$scope.currentRoundCorrectWords = [];
+	$scope.currentLevelCorrectWords = [];
 
 
 	$scope.currentLevelInfo = {};//used to store the all the info about the level retreived from the json file
 
 
 
-	$scope.showSubmit = true;
+
 	//gets the level list from JSON and stores it
 
 
@@ -96,11 +97,12 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 	}
 	//used to parse the json file and place all objects into the word[] array
 	$scope.fetchData = function() {
-		$scope.correctWords = [];
+		//resets the list of words the user got at the end of the round
+		$scope.currentRoundCorrectWords = [];
 
 		$scope.setInputState(true);
 
-		$scope.showSubmit = false;
+
 
 		$scope.words = [];
 
@@ -115,7 +117,7 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 				}
 				else
 				{
-					blanks += "-"
+					blanks += "."
 				}
 
 			};
@@ -137,31 +139,41 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 
 	};
 
-	$scope.selectLevel =function(level){
-		$location.path("/app.html/level" + level);
-		$scope.switchState(2);
-	}
-
 	//used to compare word to user input
+	//is called everytime the user makes a change to the input box in game
+	//the parameter is used to see if the user has pressed enter
 	$scope.compare = function(pressedEnter) {
 		inactionCounter = 0;
-
+		//this sets the input all to lowercase
 		$scope.input = $scope.input.toLowerCase();
+		//this next for loop is used to check if the player has inputed any spaces
+		//if they have, then change the spaces to a dash
+		var inputTemp = "";
+		for(var i=0; i < $scope.input.length; i++){
+			if($scope.input.charAt(i) == " ")
+			{
+				inputTemp += "-"
+			}else{
+				inputTemp += $scope.input.charAt(i);
+			}
+		}
+		$scope.input = inputTemp;//sets the new inputTemp to the scopes input
 
+		//this is used to compare the input to each word in the displayed wordlist
 		for (var i = $scope.words.length - 1; i >= 0; i--) {
-
+			//if the words are equal
 			if($scope.words[i].word == $scope.input) {
-
+				//if the word has not already been entered
 				if(!$scope.words[i].strike){
 					$("#purple-box").hide();
-					$scope.status = "Good job!";
 					$scope.input = "";
 					$scope.words[i].dummy = $scope.words[i].word;
 					$scope.words[i].strike = true;
 					$scope.points += $scope.words[i].word.length - $scope.words[i].toSwap;
 					$scope.words[i].points = "+ " + ($scope.words[i].word.length - $scope.words[i].toSwap);
 					$scope.lastPointIncrease = $scope.words[i].points;
-					$scope.correctWords.push($scope.words[i]);
+					$scope.currentRoundCorrectWords.push($scope.words[i]);
+					$scope.currentLevelCorrectWords.push($scope.words[i]);
 
 					userRef.update({points: $scope.points});
 					fadeOutBox(2000);
@@ -216,6 +228,7 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 			$scope.showLevelSelect = false;
 			$scope.showGoal = false;
 		}
+		//shows the goal screen
 		if(state == 4)
 		{
 			$scope.showGame = false;
@@ -226,11 +239,12 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 
 
 	}
+
 	//this resets the level by reseting most of the game values
 	$scope.resetLevel = function(){
 		timerStop();
-		$scope.showSubmit = true;
-		$scope.showNextLevelButton = false;
+
+		$scope.showEndofRoundStatus = false;
 		$scope.wordnumber = 0;
 		$scope.secondsCounter = totalTimePerWord;
 		$scope.wordlist = [];
@@ -247,10 +261,8 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 	$scope.changeLevel = function(){
 		$scope.resetLevel();
 		$scope.getLevelData($scope.currentLevelInfo.levelNumber + 1);
-		$scope.status = "Next Level";
-		$scope.showStartButton = true;
-		$scope.showScoreButton = false;
-		$scope.switchState(2);
+		console.log($scope.currentLevelInfo);
+		$scope.switchState(4);
 
 	}
 
@@ -380,7 +392,7 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 
 	var endRound = function(){
 		sortPlayers();
-		if($scope.correctWords.length > $scope.goalNumber){
+		if($scope.currentRoundCorrectWords.length >= $scope.goalNumberWords){
 			$scope.showCompletedGoal = true;
 
 		}
@@ -428,7 +440,7 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 			if(checkIfNextLevel(levelList) == true)
 			{
 				console.log("there is a next level");
-				$scope.showNextLevelButton = true;
+				$scope.showEndofRoundStatus = true;
 
 			}
 			else {
@@ -438,7 +450,7 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
 			return;
 		}
 
-		$scope.showSubmit = true;
+
 
 
 	}
@@ -505,55 +517,6 @@ function ($scope, $http, $timeout ,$sce, $window, $location, $compile, $interval
   		}
 	});
 }]);
-//NOT IN USE AS OF JULY 12 2015
-//this is used to create all of the buttons for all of the levels in the level select
-app.directive("level", function($compile, $http){
-	return function($scope, element, attrs){
-			var NumofLevels;
-			$scope.LevelGetPromise.success(function(response){
-			NumofLevels = response.levels.length;
-			for(var i = 0; i < NumofLevels; i++){
-				//easy levels
-				if(i == 0){
-					element.append($compile("<table><tr><th>Easy</th></tr>")($scope));
-					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
-				}
-				if(i > 0 && i < 3){
-					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
-				}
-				if(i == 3){
-					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
-					element.append($compile("</table>")($scope));
-				}
-				//medium levels
-				if(i == 4){
-					element.append($compile("<table><tr><th>Medium</th></tr>")($scope));
-					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
-				}
-				if(i > 4 && i < 6){
-					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
-				}
-				if(i == 6){
-					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
-					element.append($compile("</table>")($scope));
-				}
-				//hard levels
-				if(i == 7){
-					element.append($compile("<table><tr><th>Hard</th></tr>")($scope));
-					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
-				}
-				if(i > 7 && i < 10){
-					element.append($compile("<tr><td><button ng-click='switchState(); getLevelData("+ (i+1)+")'>LEVEL "+(i+1)+"</button></td></tr>")($scope));
-				}
-				if(i == 10){
-					element.append($compile("</table>")($scope));
-				}
-			}
-		});
-
-	};
-
-});
 
 app.directive('appdir', function ($templateCache) {
 
