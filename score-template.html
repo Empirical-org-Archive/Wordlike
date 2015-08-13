@@ -1,17 +1,30 @@
 <section id="score" ng-show="showScore">
 
-  <h1>You got {{correctWords.length}} words correct.</h1>
-  <h1 ng-show="showCompletedGoal">You achieved your goal of {{ goalNumber}} words.</h1>
-  <h1 ng-hide="showCompletedGoal">You did not achieve your goal of {{goalNumber}} words.</h1>
-  <h1>Words You Got Correct This Round</h1>
-  <table id="correct-table" ng-init="rowCreate = [1]">
-      <tr ng-repeat="syn in correctWords" >
-        <td ng-repeat="r in rowCreate">
-            <span style="float: left;" id="correct-list-word">{{syn.word }}</span>
-            <span style="float: right;" id="correct-list-points">{{syn.points}}</span>
-        </td>
-      </tr>
-  </table>
+  <h1>You got {{currentRoundCorrectWords.length}} words correct this round.</h1>
+  <h1 style="color:green;" ng-show="showCompletedGoal">You achieved your goal of {{ goalNumberWords}} words.</h1>
+  <h1 style="color:red;" ng-hide="showCompletedGoal">You did not achieve your goal of {{goalNumberWords}} words.</h1>
+  <div ng-hide="showEndofRoundStatus">
+    <h1>Words You Got Correct This Round</h1>
+    <table  id="correct-table" ng-init="rowCreate = [1]">
+        <tr ng-repeat="syn in currentRoundCorrectWords" >
+          <td ng-repeat="r in rowCreate">
+              <span style="float: left;" id="correct-list-word">{{syn.word }}</span>
+              <span style="float: right;" id="correct-list-points">{{syn.points}}</span>
+          </td>
+        </tr>
+    </table>
+  </div>
+  <div ng-show="showEndofRoundStatus">
+    <h1>Words You Got Correct This Level</h1>
+    <table  id="correct-table" ng-init="rowCreate = [1]">
+        <tr ng-repeat="syn in currentLevelCorrectWords" >
+          <td ng-repeat="r in rowCreate">
+              <span style="float: left;" id="correct-list-word">{{syn.word }}</span>
+              <span style="float: right;" id="correct-list-points">{{syn.points}}</span>
+          </td>
+        </tr>
+    </table>
+  </div>
 
   <h1>Highscores</h1>
 
